@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday, Raiana! ✨</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,700;1,600&family=Montserrat:wght@400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <title>Happy Birthday, Raiana!</title>
     <style>
         :root {
             --bg-1: #120822;
@@ -13,22 +11,17 @@
             --pink: #ff6b9d;
             --rose: #ff9ebb;
             --gold: #ffd166;
-            --lavender: #cdb4db;
-            --glass: rgba(255, 255, 255, 0.08);
-            --glass-border: rgba(255, 255, 255, 0.18);
+            --glass: rgba(255, 255, 255, 0.09);
+            --glass-border: rgba(255, 255, 255, 0.2);
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: radial-gradient(circle at 20% 20%, var(--bg-2), var(--bg-1) 75%);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: linear-gradient(135deg, #240f36 0%, #120822 100%);
             background-color: #120822;
-            color: #fff;
+            color: #ffffff;
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
@@ -36,7 +29,6 @@
 
         .hidden { display: none !important; }
 
-        /* Парящие сердечки и искорки на фоне */
         #ambient-particles {
             position: fixed;
             inset: 0;
@@ -54,15 +46,13 @@
         }
 
         @keyframes floatUp {
-            0% { transform: translateY(0) rotate(0deg) scale(0.8); opacity: 0; }
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
             15% { opacity: 0.45; }
             85% { opacity: 0.35; }
-            100% { transform: translateY(-110vh) rotate(25deg) scale(1.1); opacity: 0; }
+            100% { transform: translateY(-110vh) rotate(25deg); opacity: 0; }
         }
 
-        /* =========================================
-           ВХОДНОЕ ШОУ (ПОКАЗЫВАЕТСЯ ТОЛЬКО ЧЕРЕЗ JS)
-           ========================================= */
+        /* ВХОДНОЕ ШОУ */
         #intro-overlay {
             position: fixed;
             inset: 0;
@@ -74,18 +64,11 @@
             justify-content: center;
             text-align: center;
             padding: 20px;
-            transition: opacity 1.4s ease, visibility 1.4s ease;
+            transition: opacity 1.3s ease;
         }
 
-        #intro-overlay.active {
-            display: flex;
-        }
-
-        #intro-overlay.fade-out {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
+        #intro-overlay.active { display: flex; }
+        #intro-overlay.fade-out { opacity: 0; pointer-events: none; }
 
         #fireworks-canvas {
             position: absolute;
@@ -98,52 +81,33 @@
         .intro-text-wrap {
             position: relative;
             z-index: 2;
-            animation: popInText 1.1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-        }
-
-        @keyframes popInText {
-            0% { opacity: 0; transform: scale(0.75) translateY(20px); }
-            100% { opacity: 1; transform: scale(1) translateY(0); }
         }
 
         .intro-sub {
             font-size: 0.9rem;
-            letter-spacing: 4px;
+            letter-spacing: 3px;
             text-transform: uppercase;
             color: var(--rose);
             margin-bottom: 12px;
         }
 
         .intro-title {
-            font-family: 'Pacifico', cursive, sans-serif;
-            font-size: clamp(2.6rem, 8vw, 5.2rem);
+            font-family: Georgia, "Times New Roman", serif;
+            font-style: italic;
+            font-weight: bold;
+            font-size: clamp(2.5rem, 8vw, 4.8rem);
             color: #ffd166;
-            background: linear-gradient(135deg, #fff 15%, #ff9ebb 50%, #ffd166 90%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 25px rgba(255, 107, 157, 0.7);
             line-height: 1.2;
-            padding: 10px;
         }
 
-        /* =========================================
-           ОСНОВНОЙ КОНТЕЙНЕР (ВИДЕН СРАЗУ!)
-           ========================================= */
+        /* ОСНОВНОЙ КОНТЕЙНЕР */
         #app-wrapper {
             position: relative;
             z-index: 2;
-            max-width: 720px;
+            max-width: 700px;
             margin: 0 auto;
-            padding: 36px 18px 130px;
-            opacity: 1;
-        }
-
-        .page-view {
-            animation: pageFade 0.55s ease;
-        }
-
-        @keyframes pageFade {
-            from { opacity: 0; transform: translateY(14px); }
-            to { opacity: 1; transform: translateY(0); }
+            padding: 32px 18px 130px;
         }
 
         .top-bar {
@@ -151,7 +115,7 @@
             justify-content: space-between;
             align-items: center;
             gap: 10px;
-            margin-bottom: 28px;
+            margin-bottom: 26px;
             flex-wrap: wrap;
         }
 
@@ -161,20 +125,17 @@
             color: #fff;
             padding: 8px 16px;
             border-radius: 50px;
-            font-size: 0.82rem;
-            font-family: inherit;
+            font-size: 0.85rem;
             cursor: pointer;
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            transition: 0.25s;
         }
-        .music-btn:hover, .nav-small-btn:hover { background: rgba(255, 107, 157, 0.25); }
 
         .date-pill {
-            font-size: 0.78rem;
+            font-size: 0.8rem;
             color: var(--rose);
-            background: rgba(255, 107, 157, 0.14);
+            background: rgba(255, 107, 157, 0.16);
             padding: 7px 14px;
             border-radius: 50px;
             border: 1px solid rgba(255, 107, 157, 0.35);
@@ -183,16 +144,14 @@
 
         .hero-header {
             text-align: center;
-            margin-bottom: 34px;
+            margin-bottom: 30px;
         }
 
         .hero-header h1 {
-            font-family: 'Pacifico', cursive, sans-serif;
-            font-size: clamp(2.1rem, 6vw, 3.3rem);
+            font-family: Georgia, serif;
+            font-style: italic;
+            font-size: clamp(2rem, 6vw, 3.1rem);
             color: #ff9ebb;
-            background: linear-gradient(135deg, #fff 20%, var(--rose) 60%, var(--gold) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
             margin-bottom: 10px;
         }
 
@@ -206,18 +165,15 @@
 
         .section-card {
             background: var(--glass);
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
             border: 1px solid var(--glass-border);
-            border-radius: 26px;
-            padding: 28px 24px;
-            margin-bottom: 24px;
-            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.3);
+            border-radius: 24px;
+            padding: 26px 22px;
+            margin-bottom: 22px;
         }
 
         .section-title {
-            font-family: 'Cormorant Garamond', Georgia, serif;
-            font-size: 1.8rem;
+            font-family: Georgia, serif;
+            font-size: 1.65rem;
             color: var(--gold);
             margin-bottom: 12px;
             text-align: center;
@@ -226,7 +182,7 @@
         .section-sub {
             text-align: center;
             font-size: 0.88rem;
-            color: rgba(255, 255, 255, 0.78);
+            color: rgba(255, 255, 255, 0.8);
             margin-bottom: 18px;
             line-height: 1.55;
         }
@@ -237,58 +193,40 @@
             border: none;
             padding: 13px 26px;
             border-radius: 50px;
-            font-family: inherit;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.92rem;
             cursor: pointer;
-            box-shadow: 0 8px 22px rgba(255, 107, 157, 0.35);
-            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 8px 20px rgba(255, 107, 157, 0.35);
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
         }
-        .cute-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 26px rgba(255, 107, 157, 0.55);
-        }
 
-        /* =========================================
-           СТРАНИЦА 1: КОНВЕРТ, ТОРТ, КОМПЛИМЕНТЫ
-           ========================================= */
+        /* КОНВЕРТ */
         .envelope-box {
-            background: linear-gradient(145deg, rgba(255, 107, 157, 0.16), rgba(123, 44, 191, 0.16));
-            border: 1px dashed rgba(255, 158, 187, 0.5);
-            border-radius: 22px;
-            padding: 26px 20px;
+            background: rgba(255, 107, 157, 0.14);
+            border: 1px dashed rgba(255, 158, 187, 0.55);
+            border-radius: 20px;
+            padding: 24px 18px;
             text-align: center;
             cursor: pointer;
-            transition: transform 0.25s, box-shadow 0.25s;
         }
 
-        .envelope-icon {
-            font-size: 3rem;
-            display: block;
-            margin-bottom: 8px;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
-        }
+        .envelope-icon { font-size: 3rem; display: block; margin-bottom: 8px; }
 
         .letter-content {
             text-align: left;
-            line-height: 1.75;
+            line-height: 1.7;
             font-size: 0.96rem;
-            color: rgba(255, 255, 255, 0.95);
+            color: #fff;
             margin-top: 16px;
             padding-top: 16px;
-            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
         }
 
-        .cake-area { text-align: center; padding: 6px 0; }
+        /* ТОРТИК */
+        .cake-area { text-align: center; }
 
         .cake-visual {
             position: relative;
@@ -304,8 +242,6 @@
             background: linear-gradient(90deg, #ff9ebb, #ff6b9d);
             border-radius: 14px 14px 4px 4px;
             margin: 0 auto;
-            position: relative;
-            box-shadow: inset 0 -6px 0 rgba(0,0,0,0.12);
         }
 
         .cake-tier-bottom {
@@ -314,8 +250,6 @@
             background: linear-gradient(90deg, #cdb4db, #a275c7);
             border-radius: 14px 14px 18px 18px;
             margin: 0 auto;
-            position: relative;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.35);
         }
 
         .candles {
@@ -330,7 +264,7 @@
         .candle {
             width: 8px;
             height: 28px;
-            background: repeating-linear-gradient(45deg, #fff, #fff 4px, #ffd166 4px, #ffd166 8px);
+            background: #ffd166;
             border-radius: 4px;
             position: relative;
         }
@@ -342,241 +276,182 @@
             transform: translateX(-50%);
             width: 10px;
             height: 15px;
-            background: radial-gradient(circle, #fff 10%, #ffd166 55%, #ff5400 100%);
-            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-            box-shadow: 0 0 14px #ffd166, 0 0 24px #ff6b9d;
+            background: #ff9e00;
+            border-radius: 50%;
+            box-shadow: 0 0 14px #ffd166;
             animation: flicker 0.35s infinite alternate;
-            transition: opacity 0.4s, transform 0.4s;
         }
 
-        .flame.blown { opacity: 0; transform: translateX(-50%) scale(0); }
+        .flame.blown { opacity: 0; }
 
         @keyframes flicker {
-            from { transform: translateX(-50%) scale(0.95) rotate(-3deg); }
-            to { transform: translateX(-50%) scale(1.08) rotate(3deg); }
+            from { transform: translateX(-50%) scale(0.92); }
+            to { transform: translateX(-50%) scale(1.1); }
         }
 
+        /* КОМПЛИМЕНТЫ */
         .compliment-display {
-            min-height: 76px;
+            min-height: 74px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(0, 0, 0, 0.25);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 18px;
-            padding: 16px 20px;
+            background: rgba(0, 0, 0, 0.28);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 16px;
+            padding: 16px;
             margin-bottom: 16px;
             font-size: 0.96rem;
             color: #ffe5ec;
             line-height: 1.5;
-            text-align: center;
         }
 
         .next-page-banner {
-            background: linear-gradient(135deg, rgba(255, 107, 157, 0.22), rgba(255, 209, 102, 0.16));
-            border: 1px solid rgba(255, 209, 102, 0.4);
-            border-radius: 26px;
-            padding: 28px 22px;
+            background: rgba(255, 107, 157, 0.18);
+            border: 1px solid rgba(255, 209, 102, 0.45);
+            border-radius: 24px;
+            padding: 26px 20px;
             text-align: center;
-            margin-top: 12px;
         }
 
-        /* =========================================
-           СТРАНИЦА 2: ПЕЧЕНЬЕ, КАПСУЛА, ОТЗЫВ
-           ========================================= */
-        .cookie-stage {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 10px 0;
-        }
+        /* СТРАНИЦА 2 */
+        .cookie-stage { display: flex; flex-direction: column; align-items: center; }
 
         .cookie-visual {
-            position: relative;
             width: 160px;
-            height: 110px;
+            height: 100px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
             user-select: none;
         }
 
-        .cookie-half {
-            font-size: 4.4rem;
-            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-            display: inline-block;
-        }
-
-        .cookie-visual.cracked .cookie-left { transform: translateX(-34px) rotate(-24deg); }
-        .cookie-visual.cracked .cookie-right { transform: translateX(34px) rotate(24deg); }
+        .cookie-half { font-size: 4.2rem; transition: transform 0.5s ease; display: inline-block; }
+        .cookie-visual.cracked .cookie-left { transform: translateX(-30px) rotate(-22deg); }
+        .cookie-visual.cracked .cookie-right { transform: translateX(30px) rotate(22deg); }
 
         .fortune-slip {
-            background: linear-gradient(90deg, #fff8eb, #fffdf9, #fff8eb);
+            background: #fff8eb;
             color: #3b1c4a;
             border-left: 4px solid #ff6b9d;
             border-right: 4px solid #ff6b9d;
-            padding: 14px 20px;
+            padding: 14px 18px;
             border-radius: 6px;
             font-weight: 600;
             font-size: 0.92rem;
             max-width: 440px;
             width: 100%;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
             margin-bottom: 16px;
         }
 
         .capsule-input {
             width: 100%;
-            min-height: 95px;
-            background: rgba(0, 0, 0, 0.28);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            border-radius: 18px;
-            padding: 14px 16px;
+            min-height: 90px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            padding: 14px;
             color: #fff;
             font-family: inherit;
             font-size: 0.95rem;
-            resize: vertical;
             margin-bottom: 14px;
-            outline: none;
         }
 
         .sealed-scroll {
-            background: linear-gradient(145deg, #2d163d, #1c0c2b);
-            border: 2px solid rgba(255, 209, 102, 0.55);
-            border-radius: 22px;
-            padding: 24px 20px;
-            position: relative;
+            background: #241035;
+            border: 2px solid rgba(255, 209, 102, 0.6);
+            border-radius: 20px;
+            padding: 22px 18px;
             text-align: center;
-            box-shadow: 0 14px 32px rgba(0, 0, 0, 0.45);
         }
 
         .wax-seal {
-            width: 52px;
-            height: 52px;
-            background: radial-gradient(circle at 30% 30%, #ff5c8a, #b51748);
+            width: 48px;
+            height: 48px;
+            background: #d62857;
             border-radius: 50%;
-            margin: 0 auto 12px;
+            margin: 0 auto 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.4rem;
-            border: 2px dashed rgba(255, 255, 255, 0.35);
+            font-size: 1.3rem;
         }
 
         .scroll-text {
-            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-family: Georgia, serif;
             font-style: italic;
-            font-size: 1.35rem;
+            font-size: 1.3rem;
             color: #ffe8f0;
-            line-height: 1.5;
             margin: 12px 0;
         }
 
-        .hearts-rating {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 16px;
-        }
+        .hearts-rating { display: flex; justify-content: center; gap: 10px; margin-bottom: 14px; }
+        .rate-heart { font-size: 1.9rem; cursor: pointer; opacity: 0.4; }
+        .rate-heart.active { opacity: 1; transform: scale(1.15); }
 
-        .rate-heart {
-            font-size: 2rem;
-            cursor: pointer;
-            filter: grayscale(1) opacity(0.45);
-            transition: transform 0.2s, filter 0.2s;
-            user-select: none;
-        }
-
-        .rate-heart.active {
-            filter: grayscale(0) opacity(1);
-            transform: scale(1.18);
-        }
-
-        .mood-tags {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 8px;
-            margin-bottom: 16px;
-        }
-
+        .mood-tags { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 14px; }
         .mood-tag {
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.16);
-            color: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            color: #fff;
             padding: 7px 14px;
             border-radius: 50px;
             font-size: 0.8rem;
             cursor: pointer;
         }
-
-        .mood-tag.selected {
-            background: rgba(255, 107, 157, 0.28);
-            border-color: var(--pink);
-            color: #fff;
-            font-weight: 600;
-        }
+        .mood-tag.selected { background: rgba(255, 107, 157, 0.35); border-color: var(--pink); }
 
         .review-card-result {
-            background: linear-gradient(135deg, rgba(255, 107, 157, 0.18), rgba(157, 78, 221, 0.18));
+            background: rgba(255, 107, 157, 0.18);
             border: 1px solid rgba(255, 158, 187, 0.45);
-            border-radius: 20px;
-            padding: 20px;
+            border-radius: 18px;
+            padding: 18px;
             text-align: center;
         }
 
-        /* =========================================
-           МИШКА-ПОМОЩНИК В УГЛУ ЭКРАНА
-           ========================================= */
+        /* МИШКА */
         .bear-widget {
             position: fixed;
-            bottom: 18px;
-            right: 18px;
+            bottom: 16px;
+            right: 16px;
             z-index: 500;
             display: flex;
             flex-direction: column;
             align-items: flex-end;
-            max-width: 270px;
+            max-width: 260px;
         }
 
         .bear-bubble {
-            background: rgba(28, 12, 46, 0.94);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 158, 187, 0.55);
+            background: #1c0c2e;
+            border: 1px solid rgba(255, 158, 187, 0.6);
             color: #fff;
-            padding: 12px 15px;
-            border-radius: 18px 18px 4px 18px;
+            padding: 11px 14px;
+            border-radius: 16px 16px 4px 16px;
             font-size: 0.82rem;
-            line-height: 1.45;
+            line-height: 1.4;
             margin-bottom: 8px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
         }
 
         .bear-avatar {
-            width: 64px;
-            height: 64px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             background: linear-gradient(135deg, #ff9ebb, #ff6b9d);
             border: 2px solid #fff;
-            box-shadow: 0 8px 22px rgba(255, 107, 157, 0.5);
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             position: relative;
-            user-select: none;
         }
 
-        .bear-face { font-size: 2.2rem; line-height: 1; }
-
+        .bear-face { font-size: 2.1rem; }
         .bear-paw {
             position: absolute;
-            bottom: 4px;
+            bottom: 3px;
             left: -4px;
-            font-size: 1.15rem;
-            transform-origin: bottom right;
+            font-size: 1.1rem;
             animation: wavePaw 1.8s infinite ease-in-out;
         }
 
@@ -584,7 +459,6 @@
             0%, 100% { transform: rotate(0deg); }
             25% { transform: rotate(-22deg); }
             50% { transform: rotate(12deg); }
-            75% { transform: rotate(-18deg); }
         }
     </style>
 </head>
@@ -592,7 +466,6 @@
 
     <div id="ambient-particles"></div>
 
-    <!-- ВХОДНОЕ ШОУ САЛЮТОВ И НАДПИСЬ HAPPY BIRTHDAY RAIANA -->
     <div id="intro-overlay">
         <canvas id="fireworks-canvas"></canvas>
         <div class="intro-text-wrap">
@@ -601,17 +474,16 @@
         </div>
     </div>
 
-    <!-- ОСНОВНОЙ КОНТЕЙНЕР -->
     <div id="app-wrapper">
         <div class="top-bar">
-            <button class="music-btn" id="music-toggle" onclick="toggleMusic()">
+            <button class="music-btn" onclick="toggleMusic()">
                 <span id="music-icon">🎵</span> <span id="music-label">Включить мелодию</span>
             </button>
             <div class="date-pill" id="page-indicator">Страница 1 из 2 ✨</div>
         </div>
 
         <!-- СТРАНИЦА 1 -->
-        <div id="page-1" class="page-view">
+        <div id="page-1">
             <div class="hero-header">
                 <h1>С Днём Рождения, Raiana! 🌸</h1>
                 <p>Этот праздник посвящён тебе. Листай ниже — здесь спрятаны тёплые слова и сюрпризы специально для тебя!</p>
@@ -656,7 +528,7 @@
 
             <div class="next-page-banner">
                 <div style="font-size: 1.8rem; margin-bottom: 6px;">🎁✨</div>
-                <h2 style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.7rem; color: var(--gold); margin-bottom: 8px;">
+                <h2 style="font-family: Georgia, serif; font-size: 1.65rem; color: var(--gold); margin-bottom: 8px;">
                     Но это ещё не всё!
                 </h2>
                 <p style="font-size: 0.9rem; color: rgba(255,255,255,0.85); margin-bottom: 18px;">
@@ -667,7 +539,7 @@
         </div>
 
         <!-- СТРАНИЦА 2 -->
-        <div id="page-2" class="page-view hidden">
+        <div id="page-2" class="hidden">
             <div style="margin-bottom: 18px;">
                 <button class="nav-small-btn" onclick="goToPage(1)">← Вернуться на 1-ю страницу</button>
             </div>
@@ -712,7 +584,7 @@
                         Капсула желаний Raiana • Запечатано
                     </div>
                     <div class="scroll-text" id="saved-wish-text"></div>
-                    <div style="font-size: 0.78rem; color: rgba(255,255,255,0.6); margin-bottom: 14px;">
+                    <div style="font-size: 0.78rem; color: rgba(255,255,255,0.65); margin-bottom: 14px;">
                         Сделай скриншот этого свитка на память ✨
                     </div>
                     <button class="nav-small-btn" onclick="editCapsule()">Изменить текст ✏️</button>
@@ -721,10 +593,10 @@
 
             <div class="section-card">
                 <div class="section-title">Твой отзыв на сюрприз 💌</div>
-                <p class="section-sub">Оцени это поздравление и напиши пару слов — сделай скрин и отправь мне, чтобы я знал, что тебе понравилось!</p>
+                <p class="section-sub">Оцени это поздравление и напиши пару слов — сделай скрин и отправь мне!</p>
 
                 <div id="review-form">
-                    <div class="hearts-rating" id="hearts-box">
+                    <div class="hearts-rating">
                         <span class="rate-heart active" onclick="setRating(1)">💖</span>
                         <span class="rate-heart active" onclick="setRating(2)">💖</span>
                         <span class="rate-heart active" onclick="setRating(3)">💖</span>
@@ -732,7 +604,7 @@
                         <span class="rate-heart active" onclick="setRating(5)">💖</span>
                     </div>
 
-                    <div class="mood-tags" id="mood-tags">
+                    <div class="mood-tags">
                         <div class="mood-tag selected" onclick="toggleTag(this)">Очень мило 🥺</div>
                         <div class="mood-tag" onclick="toggleTag(this)">Улыбнулась до ушей 😊</div>
                         <div class="mood-tag" onclick="toggleTag(this)">Салют топ! 🎆</div>
@@ -756,123 +628,103 @@
         </div>
     </div>
 
-    <!-- ИНТЕРАКТИВНЫЙ МИШКА В УГЛУ ЭКРАНА -->
     <div class="bear-widget">
         <div class="bear-bubble" id="bear-speech">
             Привет, Raiana! 🧸 С днём рождения! Нажми на меня, я скажу тебе секрет ✨
         </div>
-        <div class="bear-avatar" onclick="bearSpeak()" title="Нажми на мишку!">
+        <div class="bear-avatar" onclick="bearSpeak()">
             <span class="bear-face">🧸</span>
             <span class="bear-paw">🐾</span>
         </div>
     </div>
 
     <script>
-        function createAmbientParticles() {
-            const container = document.getElementById('ambient-particles');
-            const symbols = ['💖', '✨', '🌸', '💫', '🤍', '🦋'];
-            for (let i = 0; i < 24; i++) {
-                const el = document.createElement('div');
+        (function() {
+            var container = document.getElementById('ambient-particles');
+            var symbols = ['💖', '✨', '🌸', '💫', '🤍', '🦋'];
+            for (var i = 0; i < 20; i++) {
+                var el = document.createElement('div');
                 el.className = 'float-heart';
                 el.textContent = symbols[i % symbols.length];
-                el.style.left = Math.random() * 100 + 'vw';
+                el.style.left = (Math.random() * 100) + 'vw';
                 el.style.fontSize = (12 + Math.random() * 14) + 'px';
-                el.style.animationDuration = (9 + Math.random() * 11) + 's';
-                el.style.animationDelay = (Math.random() * 10) + 's';
+                el.style.animationDuration = (9 + Math.random() * 10) + 's';
+                el.style.animationDelay = (Math.random() * 8) + 's';
                 container.appendChild(el);
             }
-        }
-        createAmbientParticles();
 
-        function startIntroFireworks() {
-            const overlay = document.getElementById('intro-overlay');
-            const canvas = document.getElementById('fireworks-canvas');
-            if (!overlay || !canvas || !canvas.getContext) return;
-
-            overlay.classList.add('active');
-            const ctx = canvas.getContext('2d');
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-
-            window.addEventListener('resize', () => {
+            var overlay = document.getElementById('intro-overlay');
+            var canvas = document.getElementById('fireworks-canvas');
+            if (overlay && canvas && canvas.getContext) {
+                overlay.classList.add('active');
+                var ctx = canvas.getContext('2d');
                 canvas.width = window.innerWidth;
                 canvas.height = window.innerHeight;
-            });
 
-            let particles = [];
-            const colors = ['#ff6b9d', '#ffd166', '#ff9ebb', '#cdb4db', '#72efdd', '#ffffff'];
+                var particles = [];
+                var colors = ['#ff6b9d', '#ffd166', '#ff9ebb', '#cdb4db', '#72efdd', '#ffffff'];
 
-            function spawnFirework(x, y) {
-                const color = colors[Math.floor(Math.random() * colors.length)];
-                for (let i = 0; i < 55; i++) {
-                    const angle = (Math.PI * 2 * i) / 55;
-                    const speed = 2 + Math.random() * 5.5;
-                    particles.push({
-                        x, y,
-                        vx: Math.cos(angle) * speed,
-                        vy: Math.sin(angle) * speed,
-                        alpha: 1,
-                        color,
-                        size: 2 + Math.random() * 2.5
-                    });
-                }
-            }
-
-            const fwInterval = setInterval(() => {
-                spawnFirework(
-                    canvas.width * (0.15 + Math.random() * 0.7),
-                    canvas.height * (0.15 + Math.random() * 0.5)
-                );
-            }, 500);
-
-            spawnFirework(canvas.width * 0.3, canvas.height * 0.35);
-            spawnFirework(canvas.width * 0.7, canvas.height * 0.35);
-
-            let animRunning = true;
-            function animateFW() {
-                if (!animRunning) return;
-                ctx.fillStyle = 'rgba(10, 4, 20, 0.22)';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-                for (let i = particles.length - 1; i >= 0; i--) {
-                    const p = particles[i];
-                    p.x += p.vx;
-                    p.y += p.vy;
-                    p.vy += 0.06;
-                    p.alpha -= 0.016;
-
-                    if (p.alpha <= 0) {
-                        particles.splice(i, 1);
-                        continue;
+                function spawnFirework(x, y) {
+                    var color = colors[Math.floor(Math.random() * colors.length)];
+                    for (var i = 0; i < 50; i++) {
+                        var angle = (Math.PI * 2 * i) / 50;
+                        var speed = 2 + Math.random() * 5;
+                        particles.push({
+                            x: x, y: y,
+                            vx: Math.cos(angle) * speed,
+                            vy: Math.sin(angle) * speed,
+                            alpha: 1,
+                            color: color,
+                            size: 2.5
+                        });
                     }
-                    ctx.globalAlpha = p.alpha;
-                    ctx.fillStyle = p.color;
-                    ctx.beginPath();
-                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                    ctx.fill();
                 }
-                ctx.globalAlpha = 1;
-                requestAnimationFrame(animateFW);
+
+                var fwInterval = setInterval(function() {
+                    spawnFirework(canvas.width * (0.2 + Math.random() * 0.6), canvas.height * (0.2 + Math.random() * 0.4));
+                }, 500);
+
+                spawnFirework(canvas.width * 0.3, canvas.height * 0.35);
+                spawnFirework(canvas.width * 0.7, canvas.height * 0.35);
+
+                var running = true;
+                function animate() {
+                    if (!running) return;
+                    ctx.fillStyle = 'rgba(10, 4, 20, 0.25)';
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    for (var i = particles.length - 1; i >= 0; i--) {
+                        var p = particles[i];
+                        p.x += p.vx;
+                        p.y += p.vy;
+                        p.vy += 0.06;
+                        p.alpha -= 0.018;
+                        if (p.alpha <= 0) { particles.splice(i, 1); continue; }
+                        ctx.globalAlpha = p.alpha;
+                        ctx.fillStyle = p.color;
+                        ctx.beginPath();
+                        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                    ctx.globalAlpha = 1;
+                    requestAnimationFrame(animate);
+                }
+                animate();
+
+                setTimeout(function() {
+                    clearInterval(fwInterval);
+                    overlay.classList.add('fade-out');
+                    setTimeout(function() {
+                        running = false;
+                        overlay.classList.remove('active');
+                    }, 1350);
+                }, 3800);
             }
-            animateFW();
-
-            setTimeout(() => {
-                clearInterval(fwInterval);
-                overlay.classList.add('fade-out');
-                miniConfetti();
-
-                setTimeout(() => {
-                    animRunning = false;
-                    overlay.classList.remove('active');
-                }, 1450);
-            }, 4000);
-        }
+        })();
 
         function goToPage(pageNum) {
-            const p1 = document.getElementById('page-1');
-            const p2 = document.getElementById('page-2');
-            const indicator = document.getElementById('page-indicator');
-
+            var p1 = document.getElementById('page-1');
+            var p2 = document.getElementById('page-2');
+            var indicator = document.getElementById('page-indicator');
             if (pageNum === 2) {
                 p1.classList.add('hidden');
                 p2.classList.remove('hidden');
@@ -884,33 +736,25 @@
                 indicator.textContent = 'Страница 1 из 2 ✨';
                 bearSay("Снова здесь! Не забудь задуть свечки на тортике 🎂");
             }
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            miniConfetti();
+            window.scrollTo(0, 0);
         }
 
         function openEnvelope() {
-            const letter = document.getElementById('letter-body');
-            const icon = document.getElementById('env-icon');
-            const prompt = document.getElementById('env-prompt');
-            if (letter.classList.contains('hidden')) {
-                letter.classList.remove('hidden');
-                icon.textContent = '💖';
-                prompt.textContent = 'Для тебя, Raiana ✨';
-                miniConfetti();
-            }
+            document.getElementById('letter-body').classList.remove('hidden');
+            document.getElementById('env-icon').textContent = '💖';
+            document.getElementById('env-prompt').textContent = 'Для тебя, Raiana ✨';
         }
 
-        let candlesBlown = false;
         function blowCandles() {
-            if (candlesBlown) return;
-            candlesBlown = true;
-            document.querySelectorAll('.flame').forEach(f => f.classList.add('blown'));
+            var flames = document.querySelectorAll('.flame');
+            for (var i = 0; i < flames.length; i++) {
+                flames[i].classList.add('blown');
+            }
             document.getElementById('cake-status').textContent = '🎉 Ура! Желание загадано и обязательно сбудется!';
             bearSay("Я видел, как ты загадала желание! Оно точно исполнится 🌟");
-            miniConfetti();
         }
 
-        const compliments = [
+        var compliments = [
             "У тебя самая искренняя и тёплая улыбка, которая сразу поднимает настроение 🌸",
             "С тобой всегда легко, весело и можно быть собой на 100% 💖",
             "Ты умеешь поддержать в нужный момент так, как никто другой ✨",
@@ -918,14 +762,13 @@
             "Ты делаешь этот мир ярче просто тем, что в нём есть 🌷",
             "Каждый наш разговор или прогулка превращается в классное воспоминание 💫"
         ];
-        let compIndex = 0;
+        var compIndex = 0;
         function nextCompliment() {
-            const box = document.getElementById('compliment-text');
-            box.textContent = compliments[compIndex];
+            document.getElementById('compliment-text').textContent = compliments[compIndex];
             compIndex = (compIndex + 1) % compliments.length;
         }
 
-        const fortunes = [
+        var fortunes = [
             "Совсем скоро тебя ждёт событие, от которого ты будешь сиять от счастья! ✨",
             "Твоя самая смелая мечта уже нашла дорогу к тебе — просто верь в себя 💖",
             "Впереди тебя ждёт море новых ярких впечатлений и крутых побед 🌟",
@@ -933,53 +776,28 @@
             "Готовься к неожиданному и очень приятному сюрпризу в самом ближайшем будущем! 🎁",
             "Удача будет твоим главным спутником во всех начинаниях 🦋"
         ];
-        let fortuneIndex = 0;
-        let isCracked = false;
-
+        var fortuneIndex = 0;
         function crackCookie() {
-            const box = document.getElementById('cookie-box');
-            const paper = document.getElementById('fortune-paper');
-            const btn = document.getElementById('cookie-btn');
-
-            if (!isCracked) {
-                isCracked = true;
-                box.classList.add('cracked');
-                paper.textContent = "«" + fortunes[fortuneIndex] + "»";
-                fortuneIndex = (fortuneIndex + 1) % fortunes.length;
-                paper.classList.remove('hidden');
-                btn.textContent = 'Открыть ещё одну печеньку 🥠';
-                miniConfetti();
-            } else {
-                box.classList.remove('cracked');
-                paper.classList.add('hidden');
-                setTimeout(() => {
-                    box.classList.add('cracked');
-                    paper.textContent = "«" + fortunes[fortuneIndex] + "»";
-                    fortuneIndex = (fortuneIndex + 1) % fortunes.length;
-                    paper.classList.remove('hidden');
-                    miniConfetti();
-                }, 220);
-            }
+            var box = document.getElementById('cookie-box');
+            var paper = document.getElementById('fortune-paper');
+            box.classList.add('cracked');
+            paper.textContent = "«" + fortunes[fortuneIndex] + "»";
+            fortuneIndex = (fortuneIndex + 1) % fortunes.length;
+            paper.classList.remove('hidden');
+            document.getElementById('cookie-btn').textContent = 'Открыть ещё одну печеньку 🥠';
         }
 
         function sealCapsule() {
-            const input = document.getElementById('capsule-text');
-            const val = input.value.trim();
+            var input = document.getElementById('capsule-text');
+            var val = input.value.trim();
             if (!val) {
-                input.focus();
                 bearSay("Сначала напиши своё желание в окошко, а потом запечатаем! ✍️");
                 return;
             }
-            try { localStorage.setItem('raiana_time_capsule', val); } catch (e) {}
-            showSealedScroll(val);
-            bearSay("Капсула надёжно запечатана! Сделай скрин на память 🕯️✨");
-            miniConfetti();
-        }
-
-        function showSealedScroll(text) {
             document.getElementById('capsule-form').classList.add('hidden');
-            document.getElementById('saved-wish-text').textContent = "«" + text + "»";
+            document.getElementById('saved-wish-text').textContent = "«" + val + "»";
             document.getElementById('capsule-result').classList.remove('hidden');
+            bearSay("Капсула надёжно запечатана! Сделай скрин на память 🕯️✨");
         }
 
         function editCapsule() {
@@ -987,14 +805,14 @@
             document.getElementById('capsule-form').classList.remove('hidden');
         }
 
-        let currentRating = 5;
+        var currentRating = 5;
         function setRating(n) {
             currentRating = n;
-            const hearts = document.querySelectorAll('.rate-heart');
-            hearts.forEach((h, idx) => {
-                if (idx < n) h.classList.add('active');
-                else h.classList.remove('active');
-            });
+            var hearts = document.querySelectorAll('.rate-heart');
+            for (var i = 0; i < hearts.length; i++) {
+                if (i < n) hearts[i].classList.add('active');
+                else hearts[i].classList.remove('active');
+            }
         }
 
         function toggleTag(el) {
@@ -1002,20 +820,24 @@
         }
 
         function submitReview() {
-            const comment = document.getElementById('review-text').value.trim() || "Спасибо за такое классное поздравление! 💖";
-            const selectedTags = Array.from(document.querySelectorAll('.mood-tag.selected')).map(t => t.textContent);
+            var comment = document.getElementById('review-text').value.trim() || "Спасибо за такое классное поздравление! 💖";
+            var tags = document.querySelectorAll('.mood-tag.selected');
+            var tagNames = [];
+            for (var i = 0; i < tags.length; i++) tagNames.push(tags[i].textContent);
 
-            document.getElementById('res-hearts').textContent = '💖'.repeat(currentRating);
-            document.getElementById('res-tags').textContent = selectedTags.length ? selectedTags.join(' • ') : 'Праздничное настроение ✨';
+            var heartsStr = '';
+            for (var j = 0; j < currentRating; j++) heartsStr += '💖';
+
+            document.getElementById('res-hearts').textContent = heartsStr;
+            document.getElementById('res-tags').textContent = tagNames.length ? tagNames.join(' • ') : 'Праздничное настроение ✨';
             document.getElementById('res-comment').textContent = "«" + comment + "»";
 
             document.getElementById('review-form').classList.add('hidden');
             document.getElementById('review-result').classList.remove('hidden');
             bearSay("Ура! Отзыв готов — теперь можно заскринить и отправить автору 📸");
-            miniConfetti();
         }
 
-        const bearPhrases = [
+        var bearPhrases = [
             "Ты сегодня просто светишься от красоты, Raiana! ✨",
             "Этот мир намного светлее и добрее, потому что в нём есть ты 🌸",
             "Не забудь заглянуть на вторую страницу — там печеньки с предсказаниями! 🥠",
@@ -1023,37 +845,21 @@
             "Пусть вокруг всегда будет много твоих любимых вкусняшек и искреннего смеха 🍓",
             "Ты заслуживаешь самого волшебного дня рождения! 👑"
         ];
-        let bearIdx = 0;
-
+        var bearIdx = 0;
         function bearSpeak() {
             bearSay(bearPhrases[bearIdx]);
             bearIdx = (bearIdx + 1) % bearPhrases.length;
         }
-
         function bearSay(text) {
-            const bubble = document.getElementById('bear-speech');
-            bubble.textContent = text;
+            document.getElementById('bear-speech').textContent = text;
         }
 
-        function miniConfetti() {
-            if (typeof confetti === 'function') {
-                confetti({
-                    particleCount: 75,
-                    spread: 70,
-                    origin: { y: 0.65 },
-                    colors: ['#ff6b9d', '#ffd166', '#ff9ebb', '#cdb4db']
-                });
-            }
-        }
-
-        let audioCtx = null;
-        let isPlayingMusic = false;
-        let musicTimer = null;
-
+        var audioCtx = null;
+        var isPlayingMusic = false;
+        var musicTimer = null;
         function toggleMusic() {
-            const btnLabel = document.getElementById('music-label');
-            const btnIcon = document.getElementById('music-icon');
-
+            var btnLabel = document.getElementById('music-label');
+            var btnIcon = document.getElementById('music-icon');
             if (isPlayingMusic) {
                 isPlayingMusic = false;
                 clearInterval(musicTimer);
@@ -1061,53 +867,35 @@
                 btnIcon.textContent = '🎵';
                 return;
             }
-
-            if (!audioCtx) {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            }
+            var AudioContextClass = window.AudioContext || window.webkitAudioContext;
+            if (!AudioContextClass) return;
+            if (!audioCtx) audioCtx = new AudioContextClass();
             isPlayingMusic = true;
             btnLabel.textContent = 'Пауза';
             btnIcon.textContent = '🎶';
 
-            const melody = [
-                261.63, 261.63, 293.66, 261.63, 349.23, 329.63,
-                261.63, 261.63, 293.66, 261.63, 392.00, 349.23,
-                261.63, 261.63, 523.25, 440.00, 349.23, 329.63, 293.66,
-                466.16, 466.16, 440.00, 349.23, 392.00, 349.23
-            ];
-            let noteIdx = 0;
-
+            var melody = [261.63, 261.63, 293.66, 261.63, 349.23, 329.63, 261.63, 261.63, 293.66, 261.63, 392.00, 349.23];
+            var idx = 0;
             function playNote(freq) {
                 if (!isPlayingMusic) return;
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
+                var osc = audioCtx.createOscillator();
+                var gain = audioCtx.createGain();
                 osc.type = 'sine';
                 osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
                 gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.65);
+                gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.6);
                 osc.connect(gain);
                 gain.connect(audioCtx.destination);
                 osc.start();
-                osc.stop(audioCtx.currentTime + 0.65);
+                osc.stop(audioCtx.currentTime + 0.6);
             }
-
             playNote(melody[0]);
-            noteIdx = 1;
-            musicTimer = setInterval(() => {
-                playNote(melody[noteIdx]);
-                noteIdx = (noteIdx + 1) % melody.length;
+            idx = 1;
+            musicTimer = setInterval(function() {
+                playNote(melody[idx]);
+                idx = (idx + 1) % melody.length;
             }, 520);
         }
-
-        // Запуск сразу при выполнении скрипта
-        startIntroFireworks();
-        try {
-            const savedCapsule = localStorage.getItem('raiana_time_capsule');
-            if (savedCapsule) {
-                document.getElementById('capsule-text').value = savedCapsule;
-                showSealedScroll(savedCapsule);
-            }
-        } catch (e) {}
     </script>
 </body>
 </html>
