@@ -183,4 +183,931 @@
 
         .hero-header {
             text-align: center;
-            margin-bottom: 3
+            margin-bottom: 34px;
+        }
+
+        .hero-header h1 {
+            font-family: 'Pacifico', cursive, sans-serif;
+            font-size: clamp(2.1rem, 6vw, 3.3rem);
+            color: #ff9ebb;
+            background: linear-gradient(135deg, #fff 20%, var(--rose) 60%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .hero-header p {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 0.96rem;
+            max-width: 520px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .section-card {
+            background: var(--glass);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid var(--glass-border);
+            border-radius: 26px;
+            padding: 28px 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .section-sub {
+            text-align: center;
+            font-size: 0.88rem;
+            color: rgba(255, 255, 255, 0.78);
+            margin-bottom: 18px;
+            line-height: 1.55;
+        }
+
+        .cute-btn {
+            background: linear-gradient(135deg, #ff6b9d, #9d4edd);
+            color: #fff;
+            border: none;
+            padding: 13px 26px;
+            border-radius: 50px;
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            box-shadow: 0 8px 22px rgba(255, 107, 157, 0.35);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .cute-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 26px rgba(255, 107, 157, 0.55);
+        }
+
+        /* =========================================
+           СТРАНИЦА 1: КОНВЕРТ, ТОРТ, КОМПЛИМЕНТЫ
+           ========================================= */
+        .envelope-box {
+            background: linear-gradient(145deg, rgba(255, 107, 157, 0.16), rgba(123, 44, 191, 0.16));
+            border: 1px dashed rgba(255, 158, 187, 0.5);
+            border-radius: 22px;
+            padding: 26px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+
+        .envelope-icon {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 8px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        .letter-content {
+            text-align: left;
+            line-height: 1.75;
+            font-size: 0.96rem;
+            color: rgba(255, 255, 255, 0.95);
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .cake-area { text-align: center; padding: 6px 0; }
+
+        .cake-visual {
+            position: relative;
+            width: 170px;
+            height: 120px;
+            margin: 34px auto 18px;
+            cursor: pointer;
+        }
+
+        .cake-tier-top {
+            width: 120px;
+            height: 45px;
+            background: linear-gradient(90deg, #ff9ebb, #ff6b9d);
+            border-radius: 14px 14px 4px 4px;
+            margin: 0 auto;
+            position: relative;
+            box-shadow: inset 0 -6px 0 rgba(0,0,0,0.12);
+        }
+
+        .cake-tier-bottom {
+            width: 165px;
+            height: 55px;
+            background: linear-gradient(90deg, #cdb4db, #a275c7);
+            border-radius: 14px 14px 18px 18px;
+            margin: 0 auto;
+            position: relative;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.35);
+        }
+
+        .candles {
+            position: absolute;
+            top: -28px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 18px;
+        }
+
+        .candle {
+            width: 8px;
+            height: 28px;
+            background: repeating-linear-gradient(45deg, #fff, #fff 4px, #ffd166 4px, #ffd166 8px);
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .flame {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 15px;
+            background: radial-gradient(circle, #fff 10%, #ffd166 55%, #ff5400 100%);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            box-shadow: 0 0 14px #ffd166, 0 0 24px #ff6b9d;
+            animation: flicker 0.35s infinite alternate;
+            transition: opacity 0.4s, transform 0.4s;
+        }
+
+        .flame.blown { opacity: 0; transform: translateX(-50%) scale(0); }
+
+        @keyframes flicker {
+            from { transform: translateX(-50%) scale(0.95) rotate(-3deg); }
+            to { transform: translateX(-50%) scale(1.08) rotate(3deg); }
+        }
+
+        .compliment-display {
+            min-height: 76px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 18px;
+            padding: 16px 20px;
+            margin-bottom: 16px;
+            font-size: 0.96rem;
+            color: #ffe5ec;
+            line-height: 1.5;
+            text-align: center;
+        }
+
+        .next-page-banner {
+            background: linear-gradient(135deg, rgba(255, 107, 157, 0.22), rgba(255, 209, 102, 0.16));
+            border: 1px solid rgba(255, 209, 102, 0.4);
+            border-radius: 26px;
+            padding: 28px 22px;
+            text-align: center;
+            margin-top: 12px;
+        }
+
+        /* =========================================
+           СТРАНИЦА 2: ПЕЧЕНЬЕ, КАПСУЛА, ОТЗЫВ
+           ========================================= */
+        .cookie-stage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px 0;
+        }
+
+        .cookie-visual {
+            position: relative;
+            width: 160px;
+            height: 110px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            user-select: none;
+        }
+
+        .cookie-half {
+            font-size: 4.4rem;
+            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            display: inline-block;
+        }
+
+        .cookie-visual.cracked .cookie-left { transform: translateX(-34px) rotate(-24deg); }
+        .cookie-visual.cracked .cookie-right { transform: translateX(34px) rotate(24deg); }
+
+        .fortune-slip {
+            background: linear-gradient(90deg, #fff8eb, #fffdf9, #fff8eb);
+            color: #3b1c4a;
+            border-left: 4px solid #ff6b9d;
+            border-right: 4px solid #ff6b9d;
+            padding: 14px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.92rem;
+            max-width: 440px;
+            width: 100%;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+            margin-bottom: 16px;
+        }
+
+        .capsule-input {
+            width: 100%;
+            min-height: 95px;
+            background: rgba(0, 0, 0, 0.28);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 18px;
+            padding: 14px 16px;
+            color: #fff;
+            font-family: inherit;
+            font-size: 0.95rem;
+            resize: vertical;
+            margin-bottom: 14px;
+            outline: none;
+        }
+
+        .sealed-scroll {
+            background: linear-gradient(145deg, #2d163d, #1c0c2b);
+            border: 2px solid rgba(255, 209, 102, 0.55);
+            border-radius: 22px;
+            padding: 24px 20px;
+            position: relative;
+            text-align: center;
+            box-shadow: 0 14px 32px rgba(0, 0, 0, 0.45);
+        }
+
+        .wax-seal {
+            width: 52px;
+            height: 52px;
+            background: radial-gradient(circle at 30% 30%, #ff5c8a, #b51748);
+            border-radius: 50%;
+            margin: 0 auto 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            border: 2px dashed rgba(255, 255, 255, 0.35);
+        }
+
+        .scroll-text {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-style: italic;
+            font-size: 1.35rem;
+            color: #ffe8f0;
+            line-height: 1.5;
+            margin: 12px 0;
+        }
+
+        .hearts-rating {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .rate-heart {
+            font-size: 2rem;
+            cursor: pointer;
+            filter: grayscale(1) opacity(0.45);
+            transition: transform 0.2s, filter 0.2s;
+            user-select: none;
+        }
+
+        .rate-heart.active {
+            filter: grayscale(0) opacity(1);
+            transform: scale(1.18);
+        }
+
+        .mood-tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .mood-tag {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            color: rgba(255, 255, 255, 0.85);
+            padding: 7px 14px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+
+        .mood-tag.selected {
+            background: rgba(255, 107, 157, 0.28);
+            border-color: var(--pink);
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .review-card-result {
+            background: linear-gradient(135deg, rgba(255, 107, 157, 0.18), rgba(157, 78, 221, 0.18));
+            border: 1px solid rgba(255, 158, 187, 0.45);
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* =========================================
+           МИШКА-ПОМОЩНИК В УГЛУ ЭКРАНА
+           ========================================= */
+        .bear-widget {
+            position: fixed;
+            bottom: 18px;
+            right: 18px;
+            z-index: 500;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            max-width: 270px;
+        }
+
+        .bear-bubble {
+            background: rgba(28, 12, 46, 0.94);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 158, 187, 0.55);
+            color: #fff;
+            padding: 12px 15px;
+            border-radius: 18px 18px 4px 18px;
+            font-size: 0.82rem;
+            line-height: 1.45;
+            margin-bottom: 8px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
+        }
+
+        .bear-avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff9ebb, #ff6b9d);
+            border: 2px solid #fff;
+            box-shadow: 0 8px 22px rgba(255, 107, 157, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+            user-select: none;
+        }
+
+        .bear-face { font-size: 2.2rem; line-height: 1; }
+
+        .bear-paw {
+            position: absolute;
+            bottom: 4px;
+            left: -4px;
+            font-size: 1.15rem;
+            transform-origin: bottom right;
+            animation: wavePaw 1.8s infinite ease-in-out;
+        }
+
+        @keyframes wavePaw {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-22deg); }
+            50% { transform: rotate(12deg); }
+            75% { transform: rotate(-18deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="ambient-particles"></div>
+
+    <!-- ВХОДНОЕ ШОУ САЛЮТОВ И НАДПИСЬ HAPPY BIRTHDAY RAIANA -->
+    <div id="intro-overlay">
+        <canvas id="fireworks-canvas"></canvas>
+        <div class="intro-text-wrap">
+            <div class="intro-sub">✨ Особенный день ✨</div>
+            <div class="intro-title">Happy Birthday,<br>Raiana! 💖</div>
+        </div>
+    </div>
+
+    <!-- ОСНОВНОЙ КОНТЕЙНЕР -->
+    <div id="app-wrapper">
+        <div class="top-bar">
+            <button class="music-btn" id="music-toggle" onclick="toggleMusic()">
+                <span id="music-icon">🎵</span> <span id="music-label">Включить мелодию</span>
+            </button>
+            <div class="date-pill" id="page-indicator">Страница 1 из 2 ✨</div>
+        </div>
+
+        <!-- СТРАНИЦА 1 -->
+        <div id="page-1" class="page-view">
+            <div class="hero-header">
+                <h1>С Днём Рождения, Raiana! 🌸</h1>
+                <p>Этот праздник посвящён тебе. Листай ниже — здесь спрятаны тёплые слова и сюрпризы специально для тебя!</p>
+            </div>
+
+            <div class="section-card">
+                <div class="section-title">Письмо для тебя 💌</div>
+                <div class="envelope-box" onclick="openEnvelope()">
+                    <span class="envelope-icon" id="env-icon">✉️</span>
+                    <div id="env-prompt" style="font-weight: 600; color: var(--rose);">Нажми на конверт, чтобы открыть</div>
+                    <div id="letter-body" class="letter-content hidden">
+                        Дорогая <b>Raiana</b>! ✨<br><br>
+                        С днём рождения тебя! Хочу пожелать, чтобы в твоей жизни всегда было место для самых тёплых эмоций, искреннего смеха и людей, которые ценят тебя так же сильно, как я.<br><br>
+                        Ты невероятно светлый, добрый и особенный человек. Пусть каждая твоя мечта сбывается легко и красиво, а впереди ждёт множество поводов улыбаться! 💖
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-card cake-area">
+                <div class="section-title">Загадай желание 🎂</div>
+                <p class="section-sub">Закрой глаза, загадай самое заветное желание и нажми на тортик, чтобы задуть свечки!</p>
+                
+                <div class="cake-visual" onclick="blowCandles()">
+                    <div class="candles">
+                        <div class="candle"><div class="flame"></div></div>
+                        <div class="candle"><div class="flame"></div></div>
+                        <div class="candle"><div class="flame"></div></div>
+                    </div>
+                    <div class="cake-tier-top"></div>
+                    <div class="cake-tier-bottom"></div>
+                </div>
+                <div id="cake-status" style="font-size: 0.85rem; color: var(--gold); font-weight: 500;">✨ Свечки горят... нажми на торт!</div>
+            </div>
+
+            <div class="section-card" style="text-align: center;">
+                <div class="section-title">Почему ты самая лучшая ✨</div>
+                <div class="compliment-display" id="compliment-text">
+                    Нажми на кнопку ниже, чтобы вытянуть милую записку 💖
+                </div>
+                <button class="cute-btn" onclick="nextCompliment()">Вытянуть ещё одну записку 🌸</button>
+            </div>
+
+            <div class="next-page-banner">
+                <div style="font-size: 1.8rem; margin-bottom: 6px;">🎁✨</div>
+                <h2 style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.7rem; color: var(--gold); margin-bottom: 8px;">
+                    Но это ещё не всё!
+                </h2>
+                <p style="font-size: 0.9rem; color: rgba(255,255,255,0.85); margin-bottom: 18px;">
+                    На второй странице тебя ждут печенье с предсказанием, капсула желаний и место для твоих впечатлений.
+                </p>
+                <button class="cute-btn" onclick="goToPage(2)">Перейти на 2-ю страницу ✨ →</button>
+            </div>
+        </div>
+
+        <!-- СТРАНИЦА 2 -->
+        <div id="page-2" class="page-view hidden">
+            <div style="margin-bottom: 18px;">
+                <button class="nav-small-btn" onclick="goToPage(1)">← Вернуться на 1-ю страницу</button>
+            </div>
+
+            <div class="hero-header">
+                <h1>Волшебная комната ✨</h1>
+                <p>Загляни в будущее, запечатай свою главную мечту и оставь свой след на память!</p>
+            </div>
+
+            <div class="section-card" style="text-align: center;">
+                <div class="section-title">Печенье с предсказанием 🥠</div>
+                <p class="section-sub">Нажми на печеньку, чтобы разломить её и узнать, что приятного тебя ждёт!</p>
+
+                <div class="cookie-stage">
+                    <div class="cookie-visual" id="cookie-box" onclick="crackCookie()">
+                        <span class="cookie-half cookie-left">🥠</span>
+                        <span class="cookie-half cookie-right" style="transform: scaleX(-1);">🥠</span>
+                    </div>
+
+                    <div id="fortune-paper" class="fortune-slip hidden"></div>
+
+                    <button class="cute-btn" id="cookie-btn" onclick="crackCookie()">Разломить печеньку ✨</button>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <div class="section-title">Капсула желаний 🕯️</div>
+                <p class="section-sub">
+                    Напиши своё главное желание, цель или послание самой себе. Нажми «Запечатать», и оно превратится в памятный свиток!
+                </p>
+
+                <div id="capsule-form">
+                    <textarea id="capsule-text" class="capsule-input" placeholder="Например: Я хочу научиться..., побывать в... и быть самой счастливой! ✨"></textarea>
+                    <div style="text-align: center;">
+                        <button class="cute-btn" onclick="sealCapsule()">Запечатать в капсулу 🕯️</button>
+                    </div>
+                </div>
+
+                <div id="capsule-result" class="sealed-scroll hidden">
+                    <div class="wax-seal">💖</div>
+                    <div style="font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gold);">
+                        Капсула желаний Raiana • Запечатано
+                    </div>
+                    <div class="scroll-text" id="saved-wish-text"></div>
+                    <div style="font-size: 0.78rem; color: rgba(255,255,255,0.6); margin-bottom: 14px;">
+                        Сделай скриншот этого свитка на память ✨
+                    </div>
+                    <button class="nav-small-btn" onclick="editCapsule()">Изменить текст ✏️</button>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <div class="section-title">Твой отзыв на сюрприз 💌</div>
+                <p class="section-sub">Оцени это поздравление и напиши пару слов — сделай скрин и отправь мне, чтобы я знал, что тебе понравилось!</p>
+
+                <div id="review-form">
+                    <div class="hearts-rating" id="hearts-box">
+                        <span class="rate-heart active" onclick="setRating(1)">💖</span>
+                        <span class="rate-heart active" onclick="setRating(2)">💖</span>
+                        <span class="rate-heart active" onclick="setRating(3)">💖</span>
+                        <span class="rate-heart active" onclick="setRating(4)">💖</span>
+                        <span class="rate-heart active" onclick="setRating(5)">💖</span>
+                    </div>
+
+                    <div class="mood-tags" id="mood-tags">
+                        <div class="mood-tag selected" onclick="toggleTag(this)">Очень мило 🥺</div>
+                        <div class="mood-tag" onclick="toggleTag(this)">Улыбнулась до ушей 😊</div>
+                        <div class="mood-tag" onclick="toggleTag(this)">Салют топ! 🎆</div>
+                        <div class="mood-tag" onclick="toggleTag(this)">Мишка супер 🧸</div>
+                    </div>
+
+                    <textarea id="review-text" class="capsule-input" style="min-height: 75px;" placeholder="Напиши свои впечатления здесь..."></textarea>
+
+                    <div style="text-align: center;">
+                        <button class="cute-btn" onclick="submitReview()">Сохранить отзыв ✨</button>
+                    </div>
+                </div>
+
+                <div id="review-result" class="review-card-result hidden">
+                    <div style="font-size: 1.6rem; margin-bottom: 6px;" id="res-hearts">💖💖💖💖💖</div>
+                    <div style="font-weight: 700; color: var(--gold); margin-bottom: 8px;" id="res-tags"></div>
+                    <p style="font-size: 0.95rem; color: #fff; line-height: 1.55; margin-bottom: 14px;" id="res-comment"></p>
+                    <div style="font-size: 0.78rem; color: var(--rose);">Отзыв сохранён! Можешь заскринить и скинуть мне 📸</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ИНТЕРАКТИВНЫЙ МИШКА В УГЛУ ЭКРАНА -->
+    <div class="bear-widget">
+        <div class="bear-bubble" id="bear-speech">
+            Привет, Raiana! 🧸 С днём рождения! Нажми на меня, я скажу тебе секрет ✨
+        </div>
+        <div class="bear-avatar" onclick="bearSpeak()" title="Нажми на мишку!">
+            <span class="bear-face">🧸</span>
+            <span class="bear-paw">🐾</span>
+        </div>
+    </div>
+
+    <script>
+        function createAmbientParticles() {
+            const container = document.getElementById('ambient-particles');
+            const symbols = ['💖', '✨', '🌸', '💫', '🤍', '🦋'];
+            for (let i = 0; i < 24; i++) {
+                const el = document.createElement('div');
+                el.className = 'float-heart';
+                el.textContent = symbols[i % symbols.length];
+                el.style.left = Math.random() * 100 + 'vw';
+                el.style.fontSize = (12 + Math.random() * 14) + 'px';
+                el.style.animationDuration = (9 + Math.random() * 11) + 's';
+                el.style.animationDelay = (Math.random() * 10) + 's';
+                container.appendChild(el);
+            }
+        }
+        createAmbientParticles();
+
+        function startIntroFireworks() {
+            const overlay = document.getElementById('intro-overlay');
+            const canvas = document.getElementById('fireworks-canvas');
+            if (!overlay || !canvas || !canvas.getContext) return;
+
+            overlay.classList.add('active');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+
+            let particles = [];
+            const colors = ['#ff6b9d', '#ffd166', '#ff9ebb', '#cdb4db', '#72efdd', '#ffffff'];
+
+            function spawnFirework(x, y) {
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                for (let i = 0; i < 55; i++) {
+                    const angle = (Math.PI * 2 * i) / 55;
+                    const speed = 2 + Math.random() * 5.5;
+                    particles.push({
+                        x, y,
+                        vx: Math.cos(angle) * speed,
+                        vy: Math.sin(angle) * speed,
+                        alpha: 1,
+                        color,
+                        size: 2 + Math.random() * 2.5
+                    });
+                }
+            }
+
+            const fwInterval = setInterval(() => {
+                spawnFirework(
+                    canvas.width * (0.15 + Math.random() * 0.7),
+                    canvas.height * (0.15 + Math.random() * 0.5)
+                );
+            }, 500);
+
+            spawnFirework(canvas.width * 0.3, canvas.height * 0.35);
+            spawnFirework(canvas.width * 0.7, canvas.height * 0.35);
+
+            let animRunning = true;
+            function animateFW() {
+                if (!animRunning) return;
+                ctx.fillStyle = 'rgba(10, 4, 20, 0.22)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                for (let i = particles.length - 1; i >= 0; i--) {
+                    const p = particles[i];
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.vy += 0.06;
+                    p.alpha -= 0.016;
+
+                    if (p.alpha <= 0) {
+                        particles.splice(i, 1);
+                        continue;
+                    }
+                    ctx.globalAlpha = p.alpha;
+                    ctx.fillStyle = p.color;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                ctx.globalAlpha = 1;
+                requestAnimationFrame(animateFW);
+            }
+            animateFW();
+
+            setTimeout(() => {
+                clearInterval(fwInterval);
+                overlay.classList.add('fade-out');
+                miniConfetti();
+
+                setTimeout(() => {
+                    animRunning = false;
+                    overlay.classList.remove('active');
+                }, 1450);
+            }, 4000);
+        }
+
+        function goToPage(pageNum) {
+            const p1 = document.getElementById('page-1');
+            const p2 = document.getElementById('page-2');
+            const indicator = document.getElementById('page-indicator');
+
+            if (pageNum === 2) {
+                p1.classList.add('hidden');
+                p2.classList.remove('hidden');
+                indicator.textContent = 'Страница 2 из 2 • Сюрпризы ✨';
+                bearSay("Ого, мы на второй странице! Попробуй разломить печеньку с предсказанием 🥠");
+            } else {
+                p2.classList.add('hidden');
+                p1.classList.remove('hidden');
+                indicator.textContent = 'Страница 1 из 2 ✨';
+                bearSay("Снова здесь! Не забудь задуть свечки на тортике 🎂");
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            miniConfetti();
+        }
+
+        function openEnvelope() {
+            const letter = document.getElementById('letter-body');
+            const icon = document.getElementById('env-icon');
+            const prompt = document.getElementById('env-prompt');
+            if (letter.classList.contains('hidden')) {
+                letter.classList.remove('hidden');
+                icon.textContent = '💖';
+                prompt.textContent = 'Для тебя, Raiana ✨';
+                miniConfetti();
+            }
+        }
+
+        let candlesBlown = false;
+        function blowCandles() {
+            if (candlesBlown) return;
+            candlesBlown = true;
+            document.querySelectorAll('.flame').forEach(f => f.classList.add('blown'));
+            document.getElementById('cake-status').textContent = '🎉 Ура! Желание загадано и обязательно сбудется!';
+            bearSay("Я видел, как ты загадала желание! Оно точно исполнится 🌟");
+            miniConfetti();
+        }
+
+        const compliments = [
+            "У тебя самая искренняя и тёплая улыбка, которая сразу поднимает настроение 🌸",
+            "С тобой всегда легко, весело и можно быть собой на 100% 💖",
+            "Ты умеешь поддержать в нужный момент так, как никто другой ✨",
+            "У тебя потрясающее чувство юмора и невероятная энергетика 🦋",
+            "Ты делаешь этот мир ярче просто тем, что в нём есть 🌷",
+            "Каждый наш разговор или прогулка превращается в классное воспоминание 💫"
+        ];
+        let compIndex = 0;
+        function nextCompliment() {
+            const box = document.getElementById('compliment-text');
+            box.textContent = compliments[compIndex];
+            compIndex = (compIndex + 1) % compliments.length;
+        }
+
+        const fortunes = [
+            "Совсем скоро тебя ждёт событие, от которого ты будешь сиять от счастья! ✨",
+            "Твоя самая смелая мечта уже нашла дорогу к тебе — просто верь в себя 💖",
+            "Впереди тебя ждёт море новых ярких впечатлений и крутых побед 🌟",
+            "Рядом с тобой всегда будут люди, которые искренне ценят и берегут тебя 🌸",
+            "Готовься к неожиданному и очень приятному сюрпризу в самом ближайшем будущем! 🎁",
+            "Удача будет твоим главным спутником во всех начинаниях 🦋"
+        ];
+        let fortuneIndex = 0;
+        let isCracked = false;
+
+        function crackCookie() {
+            const box = document.getElementById('cookie-box');
+            const paper = document.getElementById('fortune-paper');
+            const btn = document.getElementById('cookie-btn');
+
+            if (!isCracked) {
+                isCracked = true;
+                box.classList.add('cracked');
+                paper.textContent = "«" + fortunes[fortuneIndex] + "»";
+                fortuneIndex = (fortuneIndex + 1) % fortunes.length;
+                paper.classList.remove('hidden');
+                btn.textContent = 'Открыть ещё одну печеньку 🥠';
+                miniConfetti();
+            } else {
+                box.classList.remove('cracked');
+                paper.classList.add('hidden');
+                setTimeout(() => {
+                    box.classList.add('cracked');
+                    paper.textContent = "«" + fortunes[fortuneIndex] + "»";
+                    fortuneIndex = (fortuneIndex + 1) % fortunes.length;
+                    paper.classList.remove('hidden');
+                    miniConfetti();
+                }, 220);
+            }
+        }
+
+        function sealCapsule() {
+            const input = document.getElementById('capsule-text');
+            const val = input.value.trim();
+            if (!val) {
+                input.focus();
+                bearSay("Сначала напиши своё желание в окошко, а потом запечатаем! ✍️");
+                return;
+            }
+            try { localStorage.setItem('raiana_time_capsule', val); } catch (e) {}
+            showSealedScroll(val);
+            bearSay("Капсула надёжно запечатана! Сделай скрин на память 🕯️✨");
+            miniConfetti();
+        }
+
+        function showSealedScroll(text) {
+            document.getElementById('capsule-form').classList.add('hidden');
+            document.getElementById('saved-wish-text').textContent = "«" + text + "»";
+            document.getElementById('capsule-result').classList.remove('hidden');
+        }
+
+        function editCapsule() {
+            document.getElementById('capsule-result').classList.add('hidden');
+            document.getElementById('capsule-form').classList.remove('hidden');
+        }
+
+        let currentRating = 5;
+        function setRating(n) {
+            currentRating = n;
+            const hearts = document.querySelectorAll('.rate-heart');
+            hearts.forEach((h, idx) => {
+                if (idx < n) h.classList.add('active');
+                else h.classList.remove('active');
+            });
+        }
+
+        function toggleTag(el) {
+            el.classList.toggle('selected');
+        }
+
+        function submitReview() {
+            const comment = document.getElementById('review-text').value.trim() || "Спасибо за такое классное поздравление! 💖";
+            const selectedTags = Array.from(document.querySelectorAll('.mood-tag.selected')).map(t => t.textContent);
+
+            document.getElementById('res-hearts').textContent = '💖'.repeat(currentRating);
+            document.getElementById('res-tags').textContent = selectedTags.length ? selectedTags.join(' • ') : 'Праздничное настроение ✨';
+            document.getElementById('res-comment').textContent = "«" + comment + "»";
+
+            document.getElementById('review-form').classList.add('hidden');
+            document.getElementById('review-result').classList.remove('hidden');
+            bearSay("Ура! Отзыв готов — теперь можно заскринить и отправить автору 📸");
+            miniConfetti();
+        }
+
+        const bearPhrases = [
+            "Ты сегодня просто светишься от красоты, Raiana! ✨",
+            "Этот мир намного светлее и добрее, потому что в нём есть ты 🌸",
+            "Не забудь заглянуть на вторую страницу — там печеньки с предсказаниями! 🥠",
+            "Если нажать на меня ещё раз, я скажу ещё один комплимент 🧸💕",
+            "Пусть вокруг всегда будет много твоих любимых вкусняшек и искреннего смеха 🍓",
+            "Ты заслуживаешь самого волшебного дня рождения! 👑"
+        ];
+        let bearIdx = 0;
+
+        function bearSpeak() {
+            bearSay(bearPhrases[bearIdx]);
+            bearIdx = (bearIdx + 1) % bearPhrases.length;
+        }
+
+        function bearSay(text) {
+            const bubble = document.getElementById('bear-speech');
+            bubble.textContent = text;
+        }
+
+        function miniConfetti() {
+            if (typeof confetti === 'function') {
+                confetti({
+                    particleCount: 75,
+                    spread: 70,
+                    origin: { y: 0.65 },
+                    colors: ['#ff6b9d', '#ffd166', '#ff9ebb', '#cdb4db']
+                });
+            }
+        }
+
+        let audioCtx = null;
+        let isPlayingMusic = false;
+        let musicTimer = null;
+
+        function toggleMusic() {
+            const btnLabel = document.getElementById('music-label');
+            const btnIcon = document.getElementById('music-icon');
+
+            if (isPlayingMusic) {
+                isPlayingMusic = false;
+                clearInterval(musicTimer);
+                btnLabel.textContent = 'Включить мелодию';
+                btnIcon.textContent = '🎵';
+                return;
+            }
+
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            isPlayingMusic = true;
+            btnLabel.textContent = 'Пауза';
+            btnIcon.textContent = '🎶';
+
+            const melody = [
+                261.63, 261.63, 293.66, 261.63, 349.23, 329.63,
+                261.63, 261.63, 293.66, 261.63, 392.00, 349.23,
+                261.63, 261.63, 523.25, 440.00, 349.23, 329.63, 293.66,
+                466.16, 466.16, 440.00, 349.23, 392.00, 349.23
+            ];
+            let noteIdx = 0;
+
+            function playNote(freq) {
+                if (!isPlayingMusic) return;
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.65);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.65);
+            }
+
+            playNote(melody[0]);
+            noteIdx = 1;
+            musicTimer = setInterval(() => {
+                playNote(melody[noteIdx]);
+                noteIdx = (noteIdx + 1) % melody.length;
+            }, 520);
+        }
+
+        // Запуск сразу при выполнении скрипта
+        startIntroFireworks();
+        try {
+            const savedCapsule = localStorage.getItem('raiana_time_capsule');
+            if (savedCapsule) {
+                document.getElementById('capsule-text').value = savedCapsule;
+                showSealedScroll(savedCapsule);
+            }
+        } catch (e) {}
+    </script>
+</body>
+</html>
