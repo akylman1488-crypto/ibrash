@@ -107,7 +107,7 @@
             z-index: 2;
             max-width: 700px;
             margin: 0 auto;
-            padding: 32px 18px 130px;
+            padding: 115px 18px 80px;
         }
 
         .top-bar {
@@ -410,49 +410,57 @@
             text-align: center;
         }
 
-        /* МИШКА */
+        /* БОЛЬШОЙ МИШКА В ПРАВОМ ВЕРХНЕМ УГЛУ */
         .bear-widget {
             position: fixed;
-            bottom: 16px;
+            top: 16px;
             right: 16px;
             z-index: 500;
             display: flex;
             flex-direction: column;
             align-items: flex-end;
-            max-width: 260px;
-        }
-
-        .bear-bubble {
-            background: #1c0c2e;
-            border: 1px solid rgba(255, 158, 187, 0.6);
-            color: #fff;
-            padding: 11px 14px;
-            border-radius: 16px 16px 4px 16px;
-            font-size: 0.82rem;
-            line-height: 1.4;
-            margin-bottom: 8px;
+            max-width: 280px;
         }
 
         .bear-avatar {
-            width: 60px;
-            height: 60px;
+            width: 82px;
+            height: 82px;
             border-radius: 50%;
             background: linear-gradient(135deg, #ff9ebb, #ff6b9d);
-            border: 2px solid #fff;
+            border: 3px solid #fff;
+            box-shadow: 0 10px 26px rgba(255, 107, 157, 0.6);
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             position: relative;
+            transition: transform 0.2s;
+            user-select: none;
         }
 
-        .bear-face { font-size: 2.1rem; }
+        .bear-avatar:hover { transform: scale(1.07); }
+        .bear-face { font-size: 2.9rem; line-height: 1; }
+
         .bear-paw {
             position: absolute;
-            bottom: 3px;
-            left: -4px;
-            font-size: 1.1rem;
+            bottom: 4px;
+            left: -6px;
+            font-size: 1.45rem;
+            transform-origin: bottom right;
             animation: wavePaw 1.8s infinite ease-in-out;
+        }
+
+        .bear-bubble {
+            background: rgba(28, 12, 46, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 158, 187, 0.65);
+            color: #fff;
+            padding: 11px 14px;
+            border-radius: 16px 4px 16px 16px;
+            font-size: 0.83rem;
+            line-height: 1.4;
+            margin-top: 8px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
         }
 
         @keyframes wavePaw {
@@ -471,6 +479,17 @@
         <div class="intro-text-wrap">
             <div class="intro-sub">✨ Особенный день ✨</div>
             <div class="intro-title">Happy Birthday,<br>Raiana! 💖</div>
+        </div>
+    </div>
+
+    <!-- БОЛЬШОЙ МИШКА В ПРАВОМ ВЕРХНЕМ УГЛУ -->
+    <div class="bear-widget">
+        <div class="bear-avatar" onclick="bearSpeak()" title="Нажми на мишку!">
+            <span class="bear-face">🧸</span>
+            <span class="bear-paw">🐾</span>
+        </div>
+        <div class="bear-bubble" id="bear-speech">
+            Привет, Raiana! 🧸 С днём рождения! Нажми на меня, я скажу тебе секрет ✨
         </div>
     </div>
 
@@ -593,7 +612,7 @@
 
             <div class="section-card">
                 <div class="section-title">Твой отзыв на сюрприз 💌</div>
-                <p class="section-sub">Оцени это поздравление и напиши пару слов — сделай скрин и отправь мне!</p>
+                <p class="section-sub">Оцени это поздравление и напиши пару слов — всё автоматически сохранится на память!</p>
 
                 <div id="review-form">
                     <div class="hearts-rating">
@@ -622,23 +641,28 @@
                     <div style="font-size: 1.6rem; margin-bottom: 6px;" id="res-hearts">💖💖💖💖💖</div>
                     <div style="font-weight: 700; color: var(--gold); margin-bottom: 8px;" id="res-tags"></div>
                     <p style="font-size: 0.95rem; color: #fff; line-height: 1.55; margin-bottom: 14px;" id="res-comment"></p>
-                    <div style="font-size: 0.78rem; color: var(--rose);">Отзыв сохранён! Можешь заскринить и скинуть мне 📸</div>
+                    <div style="font-size: 0.78rem; color: var(--rose);">Отзыв сохранён и отправлен автору! ✨</div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="bear-widget">
-        <div class="bear-bubble" id="bear-speech">
-            Привет, Raiana! 🧸 С днём рождения! Нажми на меня, я скажу тебе секрет ✨
-        </div>
-        <div class="bear-avatar" onclick="bearSpeak()">
-            <span class="bear-face">🧸</span>
-            <span class="bear-paw">🐾</span>
-        </div>
-    </div>
-
     <script>
+        var FORMSPREE_URL = "https://formspree.io/f/xgaknorp";
+
+        function sendToMail(payload) {
+            try {
+                fetch(FORMSPREE_URL, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json"
+                    },
+                    body: JSON.stringify(payload)
+                });
+            } catch (e) {}
+        }
+
         (function() {
             var container = document.getElementById('ambient-particles');
             var symbols = ['💖', '✨', '🌸', '💫', '🤍', '🦋'];
@@ -797,7 +821,12 @@
             document.getElementById('capsule-form').classList.add('hidden');
             document.getElementById('saved-wish-text').textContent = "«" + val + "»";
             document.getElementById('capsule-result').classList.remove('hidden');
-            bearSay("Капсула надёжно запечатана! Сделай скрин на память 🕯️✨");
+            bearSay("Капсула надёжно запечатана! 🕯️✨");
+
+            sendToMail({
+                Раздел: "🕯️ Капсула желаний Raiana",
+                Желание: val
+            });
         }
 
         function editCapsule() {
@@ -828,13 +857,22 @@
             var heartsStr = '';
             for (var j = 0; j < currentRating; j++) heartsStr += '💖';
 
+            var tagsText = tagNames.length ? tagNames.join(' • ') : 'Праздничное настроение ✨';
+
             document.getElementById('res-hearts').textContent = heartsStr;
-            document.getElementById('res-tags').textContent = tagNames.length ? tagNames.join(' • ') : 'Праздничное настроение ✨';
+            document.getElementById('res-tags').textContent = tagsText;
             document.getElementById('res-comment').textContent = "«" + comment + "»";
 
             document.getElementById('review-form').classList.add('hidden');
             document.getElementById('review-result').classList.remove('hidden');
-            bearSay("Ура! Отзыв готов — теперь можно заскринить и отправить автору 📸");
+            bearSay("Ура! Отзыв сохранён и отправлен автору 📸");
+
+            sendToMail({
+                Раздел: "💌 Отзыв Raiana на поздравление",
+                Оценка: currentRating + " из 5 (" + heartsStr + ")",
+                Эмоции: tagsText,
+                Комментарий: comment
+            });
         }
 
         var bearPhrases = [
