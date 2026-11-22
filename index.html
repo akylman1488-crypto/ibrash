@@ -35,7 +35,7 @@
 
         .hidden { display: none !important; }
 
-        /* Парящие милые сердечки и искорки на фоне */
+        /* Парящие сердечки и искорки на фоне */
         #ambient-particles {
             position: fixed;
             inset: 0;
@@ -122,20 +122,29 @@
         }
 
         /* =========================================
-           ОСНОВНОЙ САЙТ ПОЗДРАВЛЕНИЯ
+           ОБЩИЙ КОНТЕЙНЕР СТРАНИЦ
            ========================================= */
-        #screen-open {
+        #app-wrapper {
             position: relative;
             z-index: 2;
             max-width: 720px;
             margin: 0 auto;
-            padding: 36px 18px 80px;
+            padding: 36px 18px 120px;
             opacity: 0;
             transition: opacity 1.2s ease;
         }
 
-        #screen-open.visible {
+        #app-wrapper.visible {
             opacity: 1;
+        }
+
+        .page-view {
+            animation: pageFade 0.55s ease;
+        }
+
+        @keyframes pageFade {
+            from { opacity: 0; transform: translateY(14px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .top-bar {
@@ -147,7 +156,7 @@
             flex-wrap: wrap;
         }
 
-        .music-btn {
+        .music-btn, .nav-small-btn {
             background: var(--glass);
             border: 1px solid var(--glass-border);
             color: #fff;
@@ -156,12 +165,12 @@
             font-size: 0.82rem;
             font-family: inherit;
             cursor: pointer;
-            display: flex;
+            display: inline-flex;
             align-items: center;
             gap: 8px;
             transition: 0.25s;
         }
-        .music-btn:hover { background: rgba(255, 107, 157, 0.25); }
+        .music-btn:hover, .nav-small-btn:hover { background: rgba(255, 107, 157, 0.25); }
 
         .date-pill {
             font-size: 0.78rem;
@@ -180,7 +189,7 @@
 
         .hero-header h1 {
             font-family: 'Pacifico', cursive;
-            font-size: clamp(2.2rem, 6vw, 3.4rem);
+            font-size: clamp(2.1rem, 6vw, 3.3rem);
             background: linear-gradient(135deg, #fff 20%, var(--rose) 60%, var(--gold) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -189,7 +198,7 @@
 
         .hero-header p {
             color: rgba(255, 255, 255, 0.8);
-            font-size: 0.98rem;
+            font-size: 0.96rem;
             max-width: 520px;
             margin: 0 auto;
             line-height: 1.6;
@@ -208,13 +217,45 @@
 
         .section-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.75rem;
+            font-size: 1.8rem;
             color: var(--gold);
-            margin-bottom: 14px;
+            margin-bottom: 12px;
             text-align: center;
         }
 
-        /* 1. ИНТЕРАКТИВНЫЙ КОНВЕРТ */
+        .section-sub {
+            text-align: center;
+            font-size: 0.88rem;
+            color: rgba(255, 255, 255, 0.74);
+            margin-bottom: 18px;
+            line-height: 1.55;
+        }
+
+        .cute-btn {
+            background: linear-gradient(135deg, #ff6b9d, #9d4edd);
+            color: #fff;
+            border: none;
+            padding: 13px 26px;
+            border-radius: 50px;
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            box-shadow: 0 8px 22px rgba(255, 107, 157, 0.35);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .cute-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 26px rgba(255, 107, 157, 0.55);
+        }
+
+        /* =========================================
+           СТРАНИЦА 1: КОНВЕРТ, ТОРТ, КОМПЛИМЕНТЫ
+           ========================================= */
         .envelope-box {
             background: linear-gradient(145deg, rgba(255, 107, 157, 0.16), rgba(123, 44, 191, 0.16));
             border: 1px dashed rgba(255, 158, 187, 0.5);
@@ -257,11 +298,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* 2. ИНТЕРАКТИВНЫЙ ТОРТИК СО СВЕЧКАМИ */
-        .cake-area {
-            text-align: center;
-            padding: 10px 0;
-        }
+        .cake-area { text-align: center; padding: 6px 0; }
 
         .cake-visual {
             position: relative;
@@ -322,17 +359,13 @@
             transition: opacity 0.4s, transform 0.4s;
         }
 
-        .flame.blown {
-            opacity: 0;
-            transform: translateX(-50%) scale(0);
-        }
+        .flame.blown { opacity: 0; transform: translateX(-50%) scale(0); }
 
         @keyframes flicker {
             from { transform: translateX(-50%) scale(0.95) rotate(-3deg); }
             to { transform: translateX(-50%) scale(1.08) rotate(3deg); }
         }
 
-        /* 3. БАНКА КОМПЛИМЕНТОВ */
         .compliment-display {
             min-height: 76px;
             display: flex;
@@ -349,385 +382,142 @@
             text-align: center;
         }
 
-        .cute-btn {
-            background: linear-gradient(135deg, #ff6b9d, #9d4edd);
-            color: #fff;
-            border: none;
-            padding: 13px 26px;
-            border-radius: 50px;
-            font-family: inherit;
-            font-weight: 600;
-            font-size: 0.9rem;
-            cursor: pointer;
-            box-shadow: 0 8px 22px rgba(255, 107, 157, 0.35);
-            transition: transform 0.2s, box-shadow 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .cute-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 26px rgba(255, 107, 157, 0.55);
-        }
-
-        /* 4. КУПОНЫ ЖЕЛАНИЙ */
-        .coupons-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-            gap: 14px;
-            margin-top: 14px;
-        }
-
-        .coupon {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px dashed rgba(255, 209, 102, 0.5);
-            border-radius: 18px;
-            padding: 18px 14px;
+        /* Карточка перехода на 2-ю страницу */
+        .next-page-banner {
+            background: linear-gradient(135deg, rgba(255, 107, 157, 0.22), rgba(255, 209, 102, 0.16));
+            border: 1px solid rgba(255, 209, 102, 0.4);
+            border-radius: 26px;
+            padding: 28px 22px;
             text-align: center;
-            cursor: pointer;
+            margin-top: 12px;
+        }
+
+        /* =========================================
+           СТРАНИЦА 2: ПЕЧЕНЬЕ, КАПСУЛА, ОТЗЫВ
+           ========================================= */
+        /* 1. Печенье с предсказанием */
+        .cookie-stage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px 0;
+        }
+
+        .cookie-visual {
             position: relative;
-            transition: 0.25s;
+            width: 160px;
+            height: 110px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            user-select: none;
         }
-        .coupon:hover {
-            background: rgba(255, 209, 102, 0.08);
-            transform: translateY(-2px);
-        }
-        .coupon-emoji { font-size: 1.8rem; margin-bottom: 6px; display: block; }
-        .coupon-title { font-weight: 600; font-size: 0.9rem; color: #fff; margin-bottom: 4px; }
-        .coupon-desc { font-size: 0.76rem; color: rgba(255,255,255,0.65); }
 
-        .coupon.used {
-            border-style: solid;
-            border-color: #ff6b9d;
-            background: rgba(255, 107, 157, 0.14);
-        }
-        .coupon-stamp {
-            margin-top: 8px;
+        .cookie-half {
+            font-size: 4.4rem;
+            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
             display: inline-block;
-            font-size: 0.7rem;
-            font-weight: 700;
-            color: #ff9ebb;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-    </style>
-</head>
-<body>
-
-    <div id="ambient-particles"></div>
-
-    <!-- ВХОДНОЕ ШОУ САЛЮТОВ И НАДПИСЬ HAPPY BIRTHDAY RAIANA -->
-    <div id="intro-overlay">
-        <canvas id="fireworks-canvas"></canvas>
-        <div class="intro-text-wrap">
-            <div class="intro-sub">✨ 7 декабря • Особенный день ✨</div>
-            <div class="intro-title">Happy Birthday,<br>Raiana! 💖</div>
-        </div>
-    </div>
-
-    <!-- ОСНОВНОЕ ПОЗДРАВЛЕНИЕ -->
-    <div id="screen-open">
-        <div class="top-bar">
-            <button class="music-btn" id="music-toggle" onclick="toggleMusic()">
-                <span id="music-icon">🎵</span> <span id="music-label">Включить нежную мелодию</span>
-            </button>
-            <div class="date-pill">7 декабря • Твой день ✨</div>
-        </div>
-
-        <div class="hero-header">
-            <h1>С Днём Рождения, Raiana! 🌸</h1>
-            <p>Сегодня весь мир крутится вокруг тебя. Листай ниже — я спрятал здесь несколько милых сюрпризов специально для тебя!</p>
-        </div>
-
-        <!-- 1. СЕКРЕТНЫЙ КОНВЕРТ -->
-        <div class="section-card">
-            <div class="section-title">Письмо для тебя 💌</div>
-            <div class="envelope-box" onclick="openEnvelope()">
-                <span class="envelope-icon" id="env-icon">✉️</span>
-                <div id="env-prompt" style="font-weight: 600; color: var(--rose);">Нажми на конверт, чтобы открыть</div>
-                <div id="letter-body" class="letter-content hidden">
-                    Дорогая <b>Raiana</b>! ✨<br><br>
-                    С днём рождения тебя! Хочу пожелать, чтобы в твоей жизни всегда было место для самых тёплых эмоций, искреннего смеха и людей, которые ценят тебя так же сильно, как я.<br><br>
-                    Ты невероятно светлый, добрый и особенный человек. Пусть каждая твоя мечта сбывается легко и красиво, а этот год подарит тебе десятки поводов улыбаться каждый день! 💖
-                </div>
-            </div>
-        </div>
-
-        <!-- 2. ТОРТИК СО СВЕЧКАМИ -->
-        <div class="section-card cake-area">
-            <div class="section-title">Загадай желание 🎂</div>
-            <p style="font-size: 0.9rem; color: rgba(255,255,255,0.75);">Закрой глаза, загадай самое заветное желание и нажми на тортик, чтобы задуть свечки!</p>
-            
-            <div class="cake-visual" onclick="blowCandles()">
-                <div class="candles">
-                    <div class="candle"><div class="flame"></div></div>
-                    <div class="candle"><div class="flame"></div></div>
-                    <div class="candle"><div class="flame"></div></div>
-                </div>
-                <div class="cake-tier-top"></div>
-                <div class="cake-tier-bottom"></div>
-            </div>
-            <div id="cake-status" style="font-size: 0.85rem; color: var(--gold); font-weight: 500;">✨ Свечки горят... нажми на торт!</div>
-        </div>
-
-        <!-- 3. БАНКА МИЛЫХ ПРИЧИН -->
-        <div class="section-card" style="text-align: center;">
-            <div class="section-title">Почему ты самая лучшая ✨</div>
-            <div class="compliment-display" id="compliment-text">
-                Нажми на кнопку ниже, чтобы вытянуть милую записку 💖
-            </div>
-            <button class="cute-btn" onclick="nextCompliment()">Вытянуть ещё одну записку 🌸</button>
-        </div>
-
-        <!-- 4. МИЛЫЕ КУПОНЫ -->
-        <div class="section-card">
-            <div class="section-title">Твои праздничные купоны 🎟️</div>
-            <p style="text-align: center; font-size: 0.85rem; color: rgba(255,255,255,0.7); margin-bottom: 10px;">
-                Нажми на любой купон, чтобы активировать его (сделай скриншот и отправь мне!).
-            </p>
-            <div class="coupons-grid">
-                <div class="coupon" onclick="activateCoupon(this)">
-                    <span class="coupon-emoji">🧋</span>
-                    <div class="coupon-title">Любимый напиток / десерт</div>
-                    <div class="coupon-desc">Угощаю чем угодно вкусным в любой день</div>
-                    <div class="coupon-stamp">Нажми, чтобы забрать</div>
-                </div>
-                <div class="coupon" onclick="activateCoupon(this)">
-                    <span class="coupon-emoji">🎬</span>
-                    <div class="coupon-title">Вечер фильмов или прогулка</div>
-                    <div class="coupon-desc">Ты выбираешь фильм, музыку и маршрут</div>
-                    <div class="coupon-stamp">Нажми, чтобы забрать</div>
-                </div>
-                <div class="coupon" onclick="activateCoupon(this)">
-                    <span class="coupon-emoji">👑</span>
-                    <div class="coupon-title">Исполнение 1 желания</div>
-                    <div class="coupon-desc">Любая твоя идея или просьба без отказов</div>
-                    <div class="coupon-stamp">Нажми, чтобы забрать</div>
-                </div>
-            </div>
-        </div>
-
-        <div style="text-align: center; margin-top: 20px;">
-            <button class="cute-btn" onclick="miniConfetti()">Запустить ещё салют 🎉</button>
-        </div>
-    </div>
-
-    <script>
-        // 1. Фоновые парящие сердечки и искорки
-        function createAmbientParticles() {
-            const container = document.getElementById('ambient-particles');
-            const symbols = ['💖', '✨', '🌸', '💫', '🤍', '🦋'];
-            for (let i = 0; i < 24; i++) {
-                const el = document.createElement('div');
-                el.className = 'float-heart';
-                el.textContent = symbols[i % symbols.length];
-                el.style.left = Math.random() * 100 + 'vw';
-                el.style.fontSize = (12 + Math.random() * 14) + 'px';
-                el.style.animationDuration = (9 + Math.random() * 11) + 's';
-                el.style.animationDelay = (Math.random() * 10) + 's';
-                container.appendChild(el);
-            }
-        }
-        createAmbientParticles();
-
-        // 2. Салюты на весь экран при входе
-        function startIntroFireworks() {
-            const overlay = document.getElementById('intro-overlay');
-            const mainScreen = document.getElementById('screen-open');
-            const canvas = document.getElementById('fireworks-canvas');
-            const ctx = canvas.getContext('2d');
-
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-
-            window.addEventListener('resize', () => {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            });
-
-            let particles = [];
-            const colors = ['#ff6b9d', '#ffd166', '#ff9ebb', '#cdb4db', '#72efdd', '#ffffff'];
-
-            function spawnFirework(x, y) {
-                const color = colors[Math.floor(Math.random() * colors.length)];
-                for (let i = 0; i < 55; i++) {
-                    const angle = (Math.PI * 2 * i) / 55;
-                    const speed = 2 + Math.random() * 5.5;
-                    particles.push({
-                        x, y,
-                        vx: Math.cos(angle) * speed,
-                        vy: Math.sin(angle) * speed,
-                        alpha: 1,
-                        color,
-                        size: 2 + Math.random() * 2.5
-                    });
-                }
-            }
-
-            const fwInterval = setInterval(() => {
-                spawnFirework(
-                    canvas.width * (0.15 + Math.random() * 0.7),
-                    canvas.height * (0.15 + Math.random() * 0.5)
-                );
-            }, 500);
-
-            spawnFirework(canvas.width * 0.3, canvas.height * 0.35);
-            spawnFirework(canvas.width * 0.7, canvas.height * 0.35);
-
-            let animRunning = true;
-            function animateFW() {
-                if (!animRunning) return;
-                ctx.fillStyle = 'rgba(10, 4, 20, 0.22)';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-                for (let i = particles.length - 1; i >= 0; i--) {
-                    const p = particles[i];
-                    p.x += p.vx;
-                    p.y += p.vy;
-                    p.vy += 0.06;
-                    p.alpha -= 0.016;
-
-                    if (p.alpha <= 0) {
-                        particles.splice(i, 1);
-                        continue;
-                    }
-                    ctx.globalAlpha = p.alpha;
-                    ctx.fillStyle = p.color;
-                    ctx.beginPath();
-                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                    ctx.fill();
-                }
-                ctx.globalAlpha = 1;
-                requestAnimationFrame(animateFW);
-            }
-            animateFW();
-
-            // Через 4.2 секунды плавно убираем заставку и проявляем основной сайт
-            setTimeout(() => {
-                clearInterval(fwInterval);
-                overlay.classList.add('fade-out');
-                mainScreen.classList.add('visible');
-                miniConfetti();
-
-                setTimeout(() => {
-                    animRunning = false;
-                    overlay.classList.add('hidden');
-                }, 1500);
-            }, 4200);
         }
 
-        // 3. Интерактив внутри
-        function openEnvelope() {
-            const letter = document.getElementById('letter-body');
-            const icon = document.getElementById('env-icon');
-            const prompt = document.getElementById('env-prompt');
-            if (letter.classList.contains('hidden')) {
-                letter.classList.remove('hidden');
-                icon.textContent = '💖';
-                prompt.textContent = 'Для тебя, Raiana ✨';
-                miniConfetti();
-            }
+        .cookie-visual.cracked .cookie-left {
+            transform: translateX(-34px) rotate(-24deg);
+        }
+        .cookie-visual.cracked .cookie-right {
+            transform: translateX(34px) rotate(24deg);
         }
 
-        let candlesBlown = false;
-        function blowCandles() {
-            if (candlesBlown) return;
-            candlesBlown = true;
-            document.querySelectorAll('.flame').forEach(f => f.classList.add('blown'));
-            document.getElementById('cake-status').textContent = '🎉 Ура! Желание загадано и обязательно сбудется!';
-            miniConfetti();
+        .fortune-slip {
+            background: linear-gradient(90deg, #fff8eb, #fffdf9, #fff8eb);
+            color: #3b1c4a;
+            border-left: 4px solid #ff6b9d;
+            border-right: 4px solid #ff6b9d;
+            padding: 14px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.92rem;
+            max-width: 440px;
+            width: 100%;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+            margin-bottom: 16px;
+            animation: slipExpand 0.55s ease;
         }
 
-        const compliments = [
-            "У тебя самая искренняя и тёплая улыбка, которая сразу поднимает настроение 🌸",
-            "С тобой всегда легко, весело и можно быть собой на 100% 💖",
-            "Ты умеешь поддержать в нужный момент так, как никто другой ✨",
-            "У тебя потрясающее чувство юмора и невероятная энергетика 🦋",
-            "Ты делаешь этот мир ярче просто тем, что в нём есть 🌷",
-            "Каждый наш разговор или прогулка превращается в классное воспоминание 💫"
-        ];
-        let compIndex = 0;
-        function nextCompliment() {
-            const box = document.getElementById('compliment-text');
-            box.textContent = compliments[compIndex];
-            compIndex = (compIndex + 1) % compliments.length;
+        @keyframes slipExpand {
+            from { opacity: 0; transform: scaleX(0.3); }
+            to { opacity: 1; transform: scaleX(1); }
         }
 
-        function activateCoupon(el) {
-            if (!el.classList.contains('used')) {
-                el.classList.add('used');
-                el.querySelector('.coupon-stamp').textContent = '✓ Активировано ❤️';
-                miniConfetti();
-            }
+        /* 2. Капсула времени */
+        .capsule-input {
+            width: 100%;
+            min-height: 95px;
+            background: rgba(0, 0, 0, 0.28);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 18px;
+            padding: 14px 16px;
+            color: #fff;
+            font-family: inherit;
+            font-size: 0.95rem;
+            resize: vertical;
+            margin-bottom: 14px;
+            outline: none;
+        }
+        .capsule-input:focus {
+            border-color: var(--gold);
         }
 
-        function miniConfetti() {
-            if (typeof confetti === 'function') {
-                confetti({
-                    particleCount: 75,
-                    spread: 70,
-                    origin: { y: 0.65 },
-                    colors: ['#ff6b9d', '#ffd166', '#ff9ebb', '#cdb4db']
-                });
-            }
+        .sealed-scroll {
+            background: linear-gradient(145deg, #2d163d, #1c0c2b);
+            border: 2px solid rgba(255, 209, 102, 0.55);
+            border-radius: 22px;
+            padding: 24px 20px;
+            position: relative;
+            text-align: center;
+            box-shadow: 0 14px 32px rgba(0, 0, 0, 0.45);
+            animation: fadeInLetter 0.6s ease;
         }
 
-        // 4. Музыкальная шкатулка
-        let audioCtx = null;
-        let isPlayingMusic = false;
-        let musicTimer = null;
-
-        function toggleMusic() {
-            const btnLabel = document.getElementById('music-label');
-            const btnIcon = document.getElementById('music-icon');
-
-            if (isPlayingMusic) {
-                isPlayingMusic = false;
-                clearInterval(musicTimer);
-                btnLabel.textContent = 'Включить нежную мелодию';
-                btnIcon.textContent = '🎵';
-                return;
-            }
-
-            if (!audioCtx) {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            }
-            isPlayingMusic = true;
-            btnLabel.textContent = 'Пауза';
-            btnIcon.textContent = '🎶';
-
-            const melody = [
-                261.63, 261.63, 293.66, 261.63, 349.23, 329.63,
-                261.63, 261.63, 293.66, 261.63, 392.00, 349.23,
-                261.63, 261.63, 523.25, 440.00, 349.23, 329.63, 293.66,
-                466.16, 466.16, 440.00, 349.23, 392.00, 349.23
-            ];
-            let noteIdx = 0;
-
-            function playNote(freq) {
-                if (!isPlayingMusic) return;
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-                gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.65);
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-                osc.start();
-                osc.stop(audioCtx.currentTime + 0.65);
-            }
-
-            playNote(melody[0]);
-            noteIdx = 1;
-            musicTimer = setInterval(() => {
-                playNote(melody[noteIdx]);
-                noteIdx = (noteIdx + 1) % melody.length;
-            }, 520);
+        .wax-seal {
+            width: 52px;
+            height: 52px;
+            background: radial-gradient(circle at 30% 30%, #ff5c8a, #b51748);
+            border-radius: 50%;
+            margin: 0 auto 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            box-shadow: 0 4px 14px rgba(255, 77, 121, 0.5);
+            border: 2px dashed rgba(255, 255, 255, 0.35);
         }
 
-        // Запуск салюта сразу при загрузке страницы
-        window.addEventListener('DOMContentLoaded', startIntroFireworks);
-    </script>
-</body>
-</html>
+        .scroll-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.35rem;
+            color: #ffe8f0;
+            line-height: 1.5;
+            margin: 12px 0;
+        }
+
+        /* 3. Отзыв на поздравление */
+        .hearts-rating {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .rate-heart {
+            font-size: 2rem;
+            cursor: pointer;
+            filter: grayscale(1) opacity(0.45);
+            transition: transform 0.2s, filter 0.2s;
+            user-select: none;
+        }
+
+        .rate-heart.active {
+            filter: grayscale(0) opacity(1);
+            transform: scale(1
