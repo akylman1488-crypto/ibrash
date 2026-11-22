@@ -3,17 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Секретное послание ✨</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <title>Для Raiana ✨</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,700;1,600&family=Montserrat:wght@400;500;600;700&family=Pacifico&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         :root {
-            --bg-dark: #0b0719;
-            --accent-1: #ff4d8d;
-            --accent-2: #7b2cbf;
-            --accent-3: #ffd166;
-            --glass: rgba(255, 255, 255, 0.06);
-            --border: rgba(255, 255, 255, 0.14);
+            --bg-1: #120822;
+            --bg-2: #240f36;
+            --pink: #ff6b9d;
+            --rose: #ff9ebb;
+            --gold: #ffd166;
+            --lavender: #cdb4db;
+            --glass: rgba(255, 255, 255, 0.07);
+            --glass-border: rgba(255, 255, 255, 0.16);
         }
 
         * {
@@ -24,184 +26,333 @@
 
         body {
             font-family: 'Montserrat', sans-serif;
-            background: radial-gradient(circle at top right, #1f1135, var(--bg-dark) 60%);
+            background: radial-gradient(circle at 20% 20%, var(--bg-2), var(--bg-1) 75%);
             color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .hidden { display: none !important; }
+
+        /* Парящие милые сердечки и искорки на фоне */
+        #ambient-particles {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .float-heart {
+            position: absolute;
+            bottom: -40px;
+            opacity: 0;
+            animation: floatUp linear infinite;
+            user-select: none;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg) scale(0.8); opacity: 0; }
+            15% { opacity: 0.45; }
+            85% { opacity: 0.35; }
+            100% { transform: translateY(-110vh) rotate(25deg) scale(1.1); opacity: 0; }
+        }
+
+        /* =========================================
+           ЭКРАН 0: СТАРТОВОЕ ШОУ С САЛЮТАМИ
+           ========================================= */
+        #intro-overlay {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at center, #1d0c30 0%, #07030f 100%);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            transition: opacity 1.4s ease, visibility 1.4s ease;
+        }
+
+        #intro-overlay.fade-out {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        #fireworks-canvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .intro-text-wrap {
+            position: relative;
+            z-index: 2;
+            animation: popInText 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        @keyframes popInText {
+            0% { opacity: 0; transform: scale(0.75) translateY(20px); filter: blur(10px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+        }
+
+        .intro-sub {
+            font-size: 0.9rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--rose);
+            margin-bottom: 12px;
+            opacity: 0.9;
+        }
+
+        .intro-title {
+            font-family: 'Pacifico', cursive;
+            font-size: clamp(2.6rem, 8vw, 5rem);
+            background: linear-gradient(135deg, #fff 15%, #ff9ebb 50%, #ffd166 90%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 40px rgba(255, 107, 157, 0.55);
+            line-height: 1.2;
+            padding: 10px;
+        }
+
+        /* =========================================
+           ОБЩИЕ КОНТЕЙНЕРЫ (ОЖИДАНИЕ / ЗАКРЫТО)
+           ========================================= */
+        .center-wrapper {
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 20px;
-            overflow-x: hidden;
             position: relative;
+            z-index: 2;
         }
 
-        .glow {
-            position: fixed;
-            width: 350px;
-            height: 350px;
-            border-radius: 50%;
-            filter: blur(110px);
-            z-index: 0;
-            opacity: 0.45;
-            pointer-events: none;
-        }
-        .glow-1 { background: var(--accent-1); top: -80px; left: -80px; }
-        .glow-2 { background: var(--accent-2); bottom: -80px; right: -80px; }
-
-        .container {
-            position: relative;
-            z-index: 1;
+        .glass-card {
             max-width: 560px;
             width: 100%;
             background: var(--glass);
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
-            border: 1px solid var(--border);
-            border-radius: 28px;
-            padding: 40px 30px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            padding: 40px 28px;
             text-align: center;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.45);
-            animation: fadeIn 0.8s ease-out;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .hidden { display: none !important; }
-
-        .badge {
+        .pill {
             display: inline-block;
-            padding: 6px 14px;
+            padding: 6px 16px;
             border-radius: 50px;
-            background: rgba(255, 77, 141, 0.18);
-            border: 1px solid rgba(255, 77, 141, 0.4);
-            color: #ff85b3;
+            background: rgba(255, 107, 157, 0.16);
+            border: 1px solid rgba(255, 107, 157, 0.4);
+            color: var(--rose);
             font-size: 12px;
             font-weight: 600;
-            letter-spacing: 1px;
+            letter-spacing: 1.2px;
             text-transform: uppercase;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
-        h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.3rem;
-            line-height: 1.2;
-            margin-bottom: 16px;
-            background: linear-gradient(135deg, #fff 30%, #ffd166 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        p {
-            color: rgba(255, 255, 255, 0.8);
-            line-height: 1.65;
-            font-size: 0.98rem;
-            margin-bottom: 24px;
-        }
-
-        /* Таймер */
         .timer-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 10px;
-            margin: 28px 0;
+            margin: 26px 0;
         }
 
         .time-box {
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 16px 8px;
+            background: rgba(0, 0, 0, 0.35);
+            border: 1px solid var(--glass-border);
+            border-radius: 18px;
+            padding: 16px 6px;
         }
 
         .time-val {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--accent-3);
+            font-size: 1.85rem;
+            font-weight: 700;
+            color: var(--gold);
             display: block;
         }
 
         .time-label {
-            font-size: 0.72rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
             color: rgba(255, 255, 255, 0.55);
             margin-top: 4px;
             display: block;
         }
 
-        /* Карточки внутри поздравления */
-        .wishes-list {
-            text-align: left;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin: 24px 0;
+        /* =========================================
+           ОСНОВНОЙ САЙТ ПОЗДРАВЛЕНИЯ (7 ДЕКАБРЯ)
+           ========================================= */
+        #screen-open {
+            position: relative;
+            z-index: 2;
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 36px 18px 80px;
+            opacity: 0;
+            transition: opacity 1.2s ease;
         }
 
-        .wish-item {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 14px 18px;
-            border-radius: 16px;
-            font-size: 0.92rem;
+        #screen-open.visible {
+            opacity: 1;
+        }
+
+        /* Верхняя панель со звуком и таймером закрытия */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+        }
+
+        .music-btn {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.82rem;
+            font-family: inherit;
+            cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 12px;
-            transition: transform 0.2s;
+            gap: 8px;
+            transition: 0.25s;
         }
+        .music-btn:hover { background: rgba(255, 107, 157, 0.25); }
 
-        .wish-item:hover {
-            transform: translateX(4px);
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        .btn {
-            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
-            color: #fff;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 50px;
-            font-family: inherit;
-            font-weight: 600;
-            font-size: 0.95rem;
-            cursor: pointer;
-            box-shadow: 0 10px 25px rgba(255, 77, 141, 0.35);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 14px 30px rgba(255, 77, 141, 0.5);
-        }
-
-        .expire-note {
-            margin-top: 22px;
+        .timer-pill {
             font-size: 0.78rem;
-            color: rgba(255, 255, 255, 0.45);
+            color: rgba(255, 255, 255, 0.65);
+            background: rgba(0, 0, 0, 0.3);
+            padding: 7px 14px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
-        /* Скрытая кнопка теста для тебя */
-        .dev-preview {
-            margin-top: 20px;
-            background: none;
-            border: none;
-            color: rgba(255, 255, 255, 0.15);
-            font-size: 11px;
+        .hero-header {
+            text-align: center;
+            margin-bottom: 34px;
+        }
+
+        .hero-header h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: clamp(2.2rem, 6vw, 3.4rem);
+            background: linear-gradient(135deg, #fff 20%, var(--rose) 60%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .hero-header p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.98rem;
+            max-width: 520px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .section-card {
+            background: var(--glass);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid var(--glass-border);
+            border-radius: 26px;
+            padding: 28px 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.75rem;
+            color: var(--gold);
+            margin-bottom: 14px;
+            text-align: center;
+        }
+
+        /* 1. ИНТЕРАКТИВНЫЙ КОНВЕРТ */
+        .envelope-box {
+            background: linear-gradient(145deg, rgba(255, 107, 157, 0.16), rgba(123, 44, 191, 0.16));
+            border: 1px dashed rgba(255, 158, 187, 0.5);
+            border-radius: 22px;
+            padding: 26px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+        .envelope-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(255, 107, 157, 0.2);
+        }
+
+        .envelope-icon {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 8px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        .letter-content {
+            text-align: left;
+            line-height: 1.75;
+            font-size: 0.96rem;
+            color: rgba(255, 255, 255, 0.92);
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            animation: fadeInLetter 0.6s ease;
+        }
+
+        @keyframes fadeInLetter {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 2. ИНТЕРАКТИВНЫЙ ТОРТИК СО СВЕЧКАМИ */
+        .cake-area {
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .cake-visual {
+            position: relative;
+            width: 170px;
+            height: 120px;
+            margin: 34px auto 18px;
             cursor: pointer;
         }
-        .dev-preview:hover { color: rgba(255, 255, 255, 0.6); }
-    </style>
-</head>
-<body>
 
-    <div class="glow glow-1"></div>
-    <div class="glow glow-2"></div>
+        .cake-tier-top {
+            width: 120px;
+            height: 45px;
+            background: linear-gradient(90deg, #ff9ebb, #ff6b9d);
+            border-radius: 14px 14px 4px 4px;
+            margin: 0 auto;
+            position: relative;
+            box-shadow: inset 0 -6px 0 rgba(0,0,0,0.12);
+        }
 
-    <!-- ЭКРАН 1: ДО 7 ДЕКАБРЯ -->
-    <div id="screen-locked" class="container hidden">
-        <div class="badge">Доступ ограничен по времени</div>
-        <h1>Твой сюрприз уже в пути ✨</h1>
-        <p>Эта страница
+        .cake-tier-bottom {
+            width: 165px;
+            height: 55px;
+            background: linear-gradient(90deg, #cdb4db, #a275c7);
+            border-radius: 14px 14px 18px 18px;
+            margin: 0 auto;
